@@ -3,299 +3,524 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Freela Norte — Seja Fundador em Sinop/MT</title>
+  <title>Fundadores Freela Norte — Sinop/MT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
-    <div class="overlay"></div>
-    <div class="hero-inner">
+  <header class="hero" id="topo">
+    <div class="hero-overlay"></div>
+    <div class="shell hero-inner">
       <nav class="nav">
         <div class="brand">
-          <img src="logo-freela-norte.png" alt="Freela Norte" class="logo-img" />
+          <img src="logo-freela-norte.png" alt="Logo Freela Norte" class="logo-img" />
           <div class="brand-text">
-            <span class="brand-title">Freela Norte</span>
-            <small>Marketplace de freelancers • Sinop/MT</small>
+            <span class="brand-title" id="brand-name">Freela Norte</span>
+            <small id="brand-city">Marketplace regional • Sinop - MT</small>
           </div>
         </div>
         <div class="nav-actions">
           <a href="#planos" class="ghost">Ver planos</a>
-          <a class="btn primary cta-whatsapp" data-plan="pro">Quero ser fundador</a>
+          <a class="btn primary cta-whatsapp" data-plan="pro" aria-label="Quero ser fundador via WhatsApp">Quero ser fundador</a>
         </div>
       </nav>
 
-      <div class="badge">Fundadores mantêm benefícios por 24 meses após o lançamento</div>
+      <div class="badge-row">
+        <span class="pill pill-ghost">Programa de Fundadores</span>
+        <span class="pill pill-glow" id="city-pill">Sinop - MT</span>
+        <span class="pill pill-amber">Vagas ultra limitadas</span>
+      </div>
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Domine os primeiros clientes de Sinop antes do lançamento.</h1>
-          <p>Garanta posição, visibilidade e selo verificado no app Freela Norte. Você entra antes do público, paga uma única vez e mantém prioridade por 24 meses.</p>
+          <h1>Domine os primeiros clientes de Sinop antes da abertura pública.</h1>
+          <p>Garanta posição, selo verificado e prioridade no ranking assim que o app abrir. É compra única para travar sua vantagem competitiva, sem prometer clientes — apenas mais visibilidade e destaque.</p>
+          <div class="mini-bullets" aria-label="Principais diferenciais">
+            <span>✓ Selo verificado</span>
+            <span>⚡ Prioridade no ranking</span>
+            <span>⏳ Lotes com vagas limitadas</span>
+          </div>
           <div class="cta-row">
             <a class="btn primary cta-whatsapp" data-plan="pro">Quero ser fundador</a>
             <a class="btn secondary" href="#planos">Ver planos</a>
           </div>
-          <div class="trust-bar">
-            <span>Em breve</span>
-            <span>Pagamento único</span>
-            <span>24 meses de prioridade</span>
-          </div>
-          <div class="social-proof">
-            <span class="dot"></span>
-            <span><strong id="proof-num">+180</strong> profissionais na lista de interesse • Sinop/MT</span>
+          <div class="hero-meta">
+            <div class="meta-pill">Fundadores entrando diariamente em Sinop</div>
+            <div class="meta-pill">Pagamento único • posição garantida</div>
+            <div class="meta-pill">Janela: <span id="launch-window">Lançamento em breve</span></div>
           </div>
         </div>
         <div class="hero-visual">
-          <img src="hero-freela-norte.png" alt="Profissionais Freela Norte" />
+          <img src="hero-freela-norte.png" alt="Visão do app Freela Norte" />
+          <div class="hero-card">
+            <div class="card-head">
+              <p>Contador de vagas por plano</p>
+              <small>Atualize no script para refletir o lote atual.</small>
+            </div>
+            <div class="slot-line">Starter <span data-slot="starter" class="slot-pill">—</span></div>
+            <div class="slot-line">Pro <span data-slot="pro" class="slot-pill highlight">—</span></div>
+            <div class="slot-line">Elite <span data-slot="elite" class="slot-pill">—</span></div>
+            <div class="card-foot">
+              <span class="dot pulse"></span>
+              <small>Vagas por plano são limitadas e podem fechar por lote.</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="offer-strip">
-        <div class="offer-info">
-          <div class="offer-meta">
-            <p>Fundadores ativos</p>
-            <h3 id="total-fundadores">—</h3>
-            <small>Contagem em tempo real (slots limitados)</small>
-          </div>
-          <div class="offer-meta">
-            <p>Lançamento</p>
-            <h3 id="data-lancamento">—</h3>
-            <small>Benefícios garantidos por 24 meses</small>
-          </div>
+        <div class="strip-text">
+          <strong>Entre antes do público e mantenha prioridade no ranking.</strong>
+          <p>Compra única para garantir posição, selo verificado e destaque inicial na busca.</p>
         </div>
-        <div class="offer-slots">
-          <span>Starter: <strong id="slot-starter">—</strong></span>
-          <span>Pro: <strong id="slot-pro">—</strong></span>
-          <span>Elite: <strong id="slot-elite">—</strong></span>
+        <div class="strip-counts" aria-label="Vagas por plano">
+          <span>Starter: <strong data-slot="starter">—</strong></span>
+          <span>Pro: <strong data-slot="pro">—</strong></span>
+          <span>Elite: <strong data-slot="elite">—</strong></span>
         </div>
-        <div class="offer-cta">
-          <p>Próximo lote pode reajustar preço. Garanta agora.</p>
-          <a class="btn primary cta-whatsapp" data-plan="pro">Garantir minha vaga</a>
-        </div>
+        <a class="btn primary cta-whatsapp" data-plan="pro">Garantir posição agora</a>
       </div>
     </div>
   </header>
 
-  <section class="benefits" id="beneficios">
-    <div class="section-head">
-      <h2>Benefícios exclusivos para Fundadores</h2>
-      <p>Você entra antes, recebe visibilidade e molda o produto que vai usar.</p>
-    </div>
-    <div class="benefit-grid">
-      <div class="benefit">Selo Verificado</div>
-      <div class="benefit">Destaque no app</div>
-      <div class="benefit">Prioridade no ranking</div>
-      <div class="benefit">Participação nas melhorias</div>
-      <div class="benefit">Condições especiais por tempo limitado</div>
-      <div class="benefit">Benefícios mantidos por 24 meses</div>
-    </div>
-  </section>
-
-  <section class="how-it-works" id="como-funciona">
-    <div class="section-head">
-      <h2>Como funciona</h2>
-      <p>Três passos para garantir sua posição antes da abertura.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Escolha seu plano</h3>
-        <p>Defina o nível de destaque e tempo de prioridade que deseja.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Complete pelo WhatsApp</h3>
-        <p>Confirmamos seus dados, validação simples e pagamento único.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Receba acesso imediato</h3>
-        <p>Entramos você no Teste Interno, liberamos selo e grupo VIP.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="plans" id="planos">
-    <div class="section-head">
-      <h2>Planos de Fundador (pagamento único)</h2>
-      <p>Escolha o pacote que combina visibilidade e prioridade no ranking.</p>
-    </div>
-    <div class="plan-grid">
-      <div class="plan-card">
-        <div class="plan-header">
-          <h3>Starter</h3>
-          <p>Selo verificado + destaque inicial</p>
+  <main>
+    <section class="section" id="programa">
+      <div class="shell section-grid">
+        <div class="section-head left">
+          <p class="eyebrow">Clareza total</p>
+          <h2>O que é o Programa de Fundadores</h2>
+          <p>Você não está comprando acesso ao app completo agora. Está garantindo posição e vantagens no lançamento: selo verificado, boost no ranking inicial e participação direta na evolução do produto.</p>
         </div>
-        <div class="price">R$197</div>
-        <ul>
-          <li>Acesso ao Teste Interno</li>
-          <li>Destaque inicial no app</li>
-          <li>Selo verificado ativo</li>
-          <li>Benefícios válidos 24 meses</li>
-        </ul>
-        <div class="slots-inline">Vagas: <span id="slot-starter-card">—</span></div>
-        <a class="btn outline cta-whatsapp" data-plan="starter">Garantir Starter</a>
-      </div>
-
-      <div class="plan-card featured">
-        <div class="plan-header">
-          <h3>Pro</h3>
-          <p>Ranking + destaque por 6 meses + grupo VIP</p>
-          <span class="pill">Mais indicado</span>
+        <div class="cards-grid two">
+          <div class="card">
+            <h3>O que é</h3>
+            <ul>
+              <li>Reserva de posição no ranking para Sinop.</li>
+              <li>Selo verificado para destacar seu perfil.</li>
+              <li>Entrada no ciclo de testes e melhorias.</li>
+              <li>Visibilidade ampliada assim que liberar ao público.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>O que não é</h3>
+            <ul>
+              <li>Não é promessa de clientes garantidos.</li>
+              <li>Não é mensalidade recorrente.</li>
+              <li>Não é acesso irrestrito para todo o Brasil.</li>
+              <li>É focado em Sinop/MT e regiões próximas.</li>
+            </ul>
+          </div>
         </div>
-        <div class="price">R$497</div>
-        <ul>
-          <li>Selo verificado + ranking priorizado</li>
-          <li>Destaque garantido por 6 meses</li>
-          <li>Grupo VIP de melhorias e oportunidades</li>
-          <li>Benefícios válidos 24 meses</li>
-        </ul>
-        <div class="slots-inline">Vagas: <span id="slot-pro-card">—</span></div>
-        <a class="btn primary cta-whatsapp" data-plan="pro">Garantir Pro</a>
       </div>
+    </section>
 
-      <div class="plan-card premium">
-        <div class="plan-header">
-          <h3>Elite</h3>
-          <p>Slots premium + suporte direto + 12 meses de destaque</p>
+    <section class="section" id="imediato">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Entrega rápida</p>
+          <h2>O que você recebe imediatamente após pagar</h2>
+          <p>Sem esperar o lançamento: liberamos seus benefícios logo após a confirmação.</p>
         </div>
-        <div class="price">R$997</div>
-        <ul>
-          <li>Top destaque por 12 meses</li>
-          <li>Suporte direto com time Freela Norte</li>
-          <li>Prioridade máxima em novas features</li>
-          <li>Benefícios válidos 24 meses</li>
-        </ul>
-        <div class="slots-inline">Vagas: <span id="slot-elite-card">—</span></div>
-        <a class="btn dark cta-whatsapp" data-plan="elite">Garantir Elite</a>
+        <div class="cards-grid three">
+          <div class="card icon-card">
+            <span class="icon">🎯</span>
+            <p>Ativação do selo verificado e badge de fundador.</p>
+          </div>
+          <div class="card icon-card">
+            <span class="icon">🚀</span>
+            <p>Entrada no Teste Interno (Google Play) para já preparar seu perfil.</p>
+          </div>
+          <div class="card icon-card">
+            <span class="icon">🤝</span>
+            <p>Grupo dos fundadores para dúvidas, roadmap e oportunidades locais.</p>
+          </div>
+          <div class="card icon-card">
+            <span class="icon">📋</span>
+            <p>Checklist de onboarding em até 7 dias para ficar pronto para o ranking.</p>
+          </div>
+          <div class="card icon-card">
+            <span class="icon">⭐</span>
+            <p>Boost inicial no algoritmo/busca durante a janela de lançamento.</p>
+          </div>
+          <div class="card icon-card">
+            <span class="icon">🛡️</span>
+            <p>Garantia de onboarding de 7 dias: suporte para deixar tudo ok.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="immediate">
-    <div class="section-head">
-      <h2>O que você recebe imediatamente após pagar</h2>
-      <p>Sem esperar o lançamento: liberamos tudo assim que confirmar.</p>
-    </div>
-    <div class="immediate-grid">
-      <div class="immediate-item">Acesso ao Teste Interno (Google Play)</div>
-      <div class="immediate-item">Entrada no grupo VIP dos fundadores</div>
-      <div class="immediate-item">Ativação do selo e badge no app</div>
-      <div class="immediate-item">Checklist para validar perfil e serviços</div>
-      <div class="immediate-item">Onboarding rápido para aparecer no ranking</div>
-    </div>
-  </section>
-
-  <section class="why-now">
-    <div class="section-head">
-      <h2>Por que agora</h2>
-      <p>Escassez real: poucas posições liberadas por lote.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <h3>Menos concorrência</h3>
-        <p>Você entra antes do público, garantindo visibilidade máxima com menos profissionais competindo.</p>
+    <section class="section soft" id="porque-agora">
+      <div class="shell section-grid">
+        <div class="section-head left">
+          <p class="eyebrow">Escassez real</p>
+          <h2>Por que entrar agora</h2>
+          <p>Fundadores entram antes, com menos concorrência e prioridade visível no ranking. Quando a abertura ao público acontecer, você já estará no topo.</p>
+        </div>
+        <div class="cards-grid two">
+          <div class="card">
+            <h3>Menos concorrência</h3>
+            <p>Vagas limitadas por plano. Cada lote fecha rápido e mantém quem entrou no topo por mais tempo.</p>
+          </div>
+          <div class="card">
+            <h3>Vantagem no algoritmo</h3>
+            <p>Selo verificado e boost de busca dão mais chance de ser visto logo nos primeiros dias.</p>
+          </div>
+          <div class="card">
+            <h3>Efeito de rede</h3>
+            <p>Quando clientes chegarem, fundadores aparecem primeiro nas categorias com destaque local.</p>
+          </div>
+          <div class="card">
+            <h3>Acesso antecipado</h3>
+            <p>Participe das melhorias, valide novidades e mantenha prioridade mesmo após o lançamento.</p>
+          </div>
+        </div>
       </div>
-      <div class="why-card">
-        <h3>Posição fixa</h3>
-        <p>Compra única para segurar ranking e destaque pelos próximos 24 meses.</p>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Processo simples</p>
+          <h2>Como funciona em 3 passos</h2>
+          <p>Sem fricção: escolha o plano, confirme pelo WhatsApp, receba tudo em poucos dias.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Escolha seu plano</h3>
+            <p>Selecione o nível de destaque e prioridade que quer no lançamento.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Fechamos pelo WhatsApp</h3>
+            <p>Validação rápida + pagamento único. Sem burocracia.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Onboarding em até 7 dias</h3>
+            <p>Ativamos selo, perfil e boost inicial para você já aparecer no ranking.</p>
+          </div>
+        </div>
       </div>
-      <div class="why-card">
-        <h3>Vantagem de fundador</h3>
-        <p>Participa das melhorias, influencia o roadmap e mantém benefícios mesmo após o lançamento.</p>
+    </section>
+
+    <!-- VÍDEOS (SMARTPHONE + TABS) -->
+    <section class="section soft" id="videos">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Veja em ação</p>
+          <h2>Como funciona para clientes e freelancers</h2>
+          <p>Troque entre Cliente e Freelancer para ver a experiência dos dois lados.</p>
+        </div>
+
+        <div class="video-grid video-grid--single">
+          <div class="video-card video-card--tabs">
+            <div class="video-head">
+              <div>
+                <h3>Veja como funciona no app</h3>
+                <small>Vídeo em tela de smartphone (igual app real).</small>
+              </div>
+
+              <div class="video-tabs" role="tablist" aria-label="Trocar vídeo">
+                <button class="video-tab is-active" type="button" data-video="cliente" aria-pressed="true">
+                  Cliente
+                </button>
+                <button class="video-tab" type="button" data-video="freelancer" aria-pressed="false">
+                  Freelancer
+                </button>
+              </div>
+            </div>
+
+            <div class="phone phone--center">
+              <div class="phone__notch"></div>
+
+              <video
+                id="demo-phone-video"
+                class="phone__video"
+                preload="metadata"
+                autoplay
+                muted
+                loop
+                playsinline
+              >
+                Seu navegador não suporta vídeo.
+              </video>
+
+              <div class="phone__gloss"></div>
+            </div>
+
+            <div class="video-foot">
+              <p id="demo-video-caption" class="video-caption">
+                Veja como os clientes encontram e contratam quem está no topo.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="proof">
-    <div class="section-head">
-      <h2>Prova social e tração</h2>
-      <p>Números que mostram a corrida para garantir vaga de fundador.</p>
-    </div>
-    <div class="proof-grid">
-      <div class="proof-card">
-        <h3>+180</h3>
-        <p>Freelancers na lista de espera para Sinop/MT</p>
+    <section class="section" id="beneficios">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Vantagens práticas</p>
+          <h2>Benefícios exclusivos para Fundadores</h2>
+          <p>Construídos para dar mais visibilidade e segurança logo no início.</p>
+        </div>
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <span class="icon">✅</span>
+            <p>Selo verificado visível no perfil.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">📈</span>
+            <p>Boost no algoritmo/ranking por meses iniciais.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">🔎</span>
+            <p>Destaque nas buscas por categoria.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">🧭</span>
+            <p>Menos concorrência no começo da operação.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">🧠</span>
+            <p>Participação em melhorias e roadmap.</p>
+          </div>
+          <div class="benefit-card">
+            <span class="icon">⏱️</span>
+            <p>Prioridade de resposta do time durante o lançamento.</p>
+          </div>
+        </div>
       </div>
-      <div class="proof-card">
-        <h3>72h</h3>
-        <p>Tempo médio para liberar selo após pagamento</p>
+    </section>
+
+    <section class="section soft" id="planos">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Planos de fundador</p>
+          <h2>Escolha seu nível de posição e destaque</h2>
+          <p>Pagou, garantiu. Todos têm pagamento único e vagas limitadas.</p>
+        </div>
+        <div class="plan-grid">
+          <div class="plan-card" data-plan-card="starter">
+            <div class="plan-top">
+              <span class="pill pill-ghost">Entrada segura</span>
+              <h3>Starter</h3>
+              <p>Selo verificado + destaque inicial</p>
+            </div>
+            <div class="plan-price" data-plan-price="starter">R$197</div>
+            <ul class="plan-list">
+              <li>Selo verificado ativo</li>
+              <li>Destaque na categoria por 30 dias</li>
+              <li>Acesso ao Teste Interno</li>
+              <li>Checklist de perfil pronto</li>
+            </ul>
+            <div class="plan-slots">Vagas restantes: <span data-slot="starter">—</span></div>
+            <a class="btn outline cta-whatsapp" data-plan="starter">Quero esse plano</a>
+          </div>
+
+          <div class="plan-card featured" data-plan-card="pro">
+            <div class="plan-top">
+              <span class="pill pill-amber">Mais escolhido</span>
+              <h3>Pro</h3>
+              <p>Boost de ranking por 6 meses + grupo fechado</p>
+            </div>
+            <div class="plan-price" data-plan-price="pro">R$497</div>
+            <ul class="plan-list">
+              <li>Prioridade no ranking por 6 meses</li>
+              <li>Selo verificado + badge Pro</li>
+              <li>Grupo VIP de fundadores</li>
+              <li>Feedback direto com o time</li>
+            </ul>
+            <div class="plan-slots">Vagas restantes: <span data-slot="pro">—</span></div>
+            <a class="btn primary cta-whatsapp" data-plan="pro">Quero esse plano</a>
+          </div>
+
+          <div class="plan-card premium" data-plan-card="elite">
+            <div class="plan-top">
+              <span class="pill pill-glow">Topo absoluto</span>
+              <h3>Elite</h3>
+              <p>Destaque máximo + suporte direto do time</p>
+            </div>
+            <div class="plan-price" data-plan-price="elite">R$997</div>
+            <ul class="plan-list">
+              <li>Top ranking por 12 meses</li>
+              <li>Selo verificado + badge Elite</li>
+              <li>Suporte direto 1:1 no lançamento</li>
+              <li>Prioridade máxima em novas features</li>
+            </ul>
+            <div class="plan-slots">Vagas restantes: <span data-slot="elite">—</span></div>
+            <a class="btn dark cta-whatsapp" data-plan="elite">Quero esse plano</a>
+          </div>
+        </div>
       </div>
-      <div class="proof-card">
-        <h3>24 meses</h3>
-        <p>Benefícios preservados após o lançamento público</p>
+    </section>
+
+    <section class="section guarantee">
+      <div class="shell guarantee-box">
+        <div class="guarantee-copy">
+          <p class="eyebrow">Garantia de onboarding</p>
+          <h3>Suporte de 7 dias para deixar seu perfil pronto</h3>
+          <p>Não prometemos clientes. Garantimos ajuda ativa para configurar seu perfil, selo e destaque dentro da janela de lançamento.</p>
+        </div>
+        <a class="btn primary cta-whatsapp" data-plan="pro">Quero ativar agora</a>
       </div>
-      <div class="proof-card">
-        <h3>Pagamento único</h3>
-        <p>Sem mensalidade até a abertura; você trava sua posição</p>
+    </section>
+
+    <section class="section" id="comparativo">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Diferença real</p>
+          <h2>Fundador vs. público geral</h2>
+          <p>Veja o que muda quando você garante sua vaga antes da abertura.</p>
+        </div>
+        <div class="compare">
+          <div class="compare-header">
+            <span></span>
+            <span>Fundador</span>
+            <span>Público</span>
+          </div>
+          <div class="compare-row">
+            <span>Selo verificado</span>
+            <span>Incluso</span>
+            <span>Após validação pública</span>
+          </div>
+          <div class="compare-row">
+            <span>Posição no ranking</span>
+            <span>Prioridade inicial</span>
+            <span>Sem prioridade</span>
+          </div>
+          <div class="compare-row">
+            <span>Destaque nas buscas</span>
+            <span>Boost nos primeiros meses</span>
+            <span>Exposição padrão</span>
+          </div>
+          <div class="compare-row">
+            <span>Grupo e suporte</span>
+            <span>Suporte direto + grupo dos fundadores</span>
+            <span>Suporte padrão</span>
+          </div>
+          <div class="compare-row">
+            <span>Acesso ao teste interno</span>
+            <span>Imediato</span>
+            <span>Quando liberar ao público</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="faq" id="faq">
-    <div class="section-head">
-      <h2>FAQ</h2>
-      <p>Dúvidas rápidas antes de garantir sua vaga.</p>
-    </div>
-    <div class="accordion">
-      <button class="accordion-item">
-        <span>Isso é mensalidade?</span>
-        <span class="icon">+</span>
-      </button>
-      <div class="panel"><p>Não. É pagamento único para reservar posição, selo e destaque pelo período incluso em cada plano.</p></div>
-
-      <button class="accordion-item">
-        <span>Como recebo acesso?</span>
-        <span class="icon">+</span>
-      </button>
-      <div class="panel"><p>Enviamos o link do Teste Interno no Google Play e ativamos seu usuário com selo verificado.</p></div>
-
-      <button class="accordion-item">
-        <span>E quando lançar?</span>
-        <span class="icon">+</span>
-      </button>
-      <div class="panel"><p>O lançamento está “Em breve”. Fundadores mantêm benefícios e prioridades por 24 meses após a abertura pública.</p></div>
-
-      <button class="accordion-item">
-        <span>É só para Sinop?</span>
-        <span class="icon">+</span>
-      </button>
-      <div class="panel"><p>Sim. Foco total em Sinop/MT para dominar clientes locais primeiro.</p></div>
-
-      <button class="accordion-item">
-        <span>Como funciona a verificação?</span>
-        <span class="icon">+</span>
-      </button>
-      <div class="panel"><p>Processo simples via documento e confirmação de atuação local. Feito pelo time via WhatsApp.</p></div>
-    </div>
-  </section>
-
-  <section class="final-cta">
-    <div class="final-box">
-      <h2>Garanta sua vaga de fundador agora</h2>
-      <p>Reserve seu slot e entre no app antes do público. Escassez real, próximo lote pode subir de preço.</p>
-      <div class="cta-row">
-        <a class="btn primary cta-whatsapp" data-plan="pro">Garantir vaga de fundador</a>
-        <a class="btn ghost" href="#planos">Comparar planos</a>
+    <section class="section soft" id="porque-nao-app">
+      <div class="shell section-grid">
+        <div class="section-head left">
+          <p class="eyebrow">Transparência</p>
+          <h2>Por que isso NÃO é acesso ao app</h2>
+          <p>O app ainda está em preparação para o público geral. O Programa de Fundadores garante posição, selo e prioridade na abertura — não libera o app completo para todos.</p>
+        </div>
+        <div class="cards-grid two">
+          <div class="card">
+            <h3>Você garante</h3>
+            <ul>
+              <li>Reserva de slot no ranking.</li>
+              <li>Selo verificado e badge de fundador.</li>
+              <li>Entrada no teste interno controlado.</li>
+              <li>Participação nas melhorias.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Você evita</h3>
+            <ul>
+              <li>Concorrer de igual para igual na abertura.</li>
+              <li>Ficar no fim da lista sem visibilidade.</li>
+              <li>Perder o lote atual e pagar mais caro depois.</li>
+              <li>Esperar sem suporte para configurar perfil.</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="mobile-cta">
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2>Perguntas frequentes</h2>
+          <p>Caso não encontre sua dúvida, fale direto no WhatsApp.</p>
+        </div>
+        <div class="accordion" role="tablist">
+          <button class="accordion-item" aria-expanded="false">
+            <span>Isso é mensalidade?</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="panel">
+            <p>Não. É pagamento único para garantir posição, selo verificado e prioridade conforme o plano escolhido.</p>
+          </div>
+
+          <button class="accordion-item" aria-expanded="false">
+            <span>Como recebo acesso?</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="panel">
+            <p>Enviamos o link do Teste Interno (Google Play) e acompanhamos o onboarding em até 7 dias.</p>
+          </div>
+
+          <button class="accordion-item" aria-expanded="false">
+            <span>É só para Sinop?</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="panel">
+            <p>Sim. Foco total em Sinop - MT neste lote para garantir qualidade e destaque local.</p>
+          </div>
+
+          <button class="accordion-item" aria-expanded="false">
+            <span>Como funciona o verificado?</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="panel">
+            <p>Validação simples: documento, atuação local e conferência de serviços. Feito pelo time via WhatsApp.</p>
+          </div>
+
+          <button class="accordion-item" aria-expanded="false">
+            <span>E se eu tiver dúvidas?</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="panel">
+            <p>Suporte direto pelo WhatsApp e no grupo dos fundadores para resolver qualquer ponto antes do lançamento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta" id="cta-final">
+      <div class="shell final-box">
+        <h2>Garanta sua posição de fundador agora</h2>
+        <p>Entre antes, apareça antes e tenha prioridade real no ranking quando Sinop abrir ao público.</p>
+        <div class="cta-row">
+          <a class="btn primary cta-whatsapp" data-plan="pro">Quero garantir minha vaga</a>
+          <a class="btn ghost" href="#planos">Comparar planos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="mobile-cta" role="complementary">
     <div class="mobile-cta-text">
-      <strong>Garanta vaga de fundador</strong>
-      <span>Pagamento único • 24 meses de prioridade</span>
+      <strong>Garantir vaga de fundador</strong>
+      <span>Pagamento único • prioridade no ranking</span>
     </div>
-    <a class="btn primary cta-whatsapp" data-plan="pro">Quero ser fundador</a>
+    <a class="btn primary cta-whatsapp" data-plan="pro">WhatsApp</a>
   </div>
 
   <footer class="footer">
-    <div>Freela Norte • Marketplace regional de freelancers • Sinop/MT</div>
-    <div>Transparência: pagamento único, posições limitadas, benefícios preservados por 24 meses.</div>
+    <div>Freela Norte • Sinop - MT</div>
+    <div>Transparência: vagas limitadas, pagamento único, prioridade no lançamento. Sem prometer clientes — entregamos mais visibilidade e destaque.</div>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
+
