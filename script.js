@@ -2,13 +2,16 @@
 const CONFIG = {
   brandName: "Freela Norte",
   city: "Sinop - MT",
-  whatsappNumber: "5566992410415",
+  whatsappNumber: "5566992410415", // DDI+DDD, apenas dígitos
+
+  // Mensagem inicial (mais humana e que abre conversa)
   whatsappBaseMessage:
-    "Fala, tudo bem? Vi o Freela Norte e quero entrar antes da abertura em Sinop. Ainda tem vaga disponível?"",
+    "Fala! Tudo bem? Vi o Freela Norte e quero entrar antes da abertura em Sinop. Ainda tem vaga para fundadores?",
 
   founderProgramName: "Fundadores Freela Norte",
   launchWindow: "Lançamento em breve",
 
+  // Cloudinary (otimização automática)
   videoPaths: {
     cliente:
       "https://res.cloudinary.com/dsxthz96u/video/upload/q_auto,f_auto/v1771804387/cliente_s89oeu.mp4",
@@ -23,6 +26,7 @@ const CONFIG = {
   ],
 };
 
+// Estado visual de vagas
 const state = {
   slots: CONFIG.plans.reduce((acc, plan) => {
     acc[plan.id] = plan.vagas;
@@ -30,6 +34,7 @@ const state = {
   }, {}),
 };
 
+// Estado do som (persistente enquanto navega na página)
 let soundEnabled = false;
 
 function sanitizeNumber(numStr) {
@@ -45,14 +50,14 @@ function getPlan(id) {
   return CONFIG.plans.find((plan) => plan.id === id) || CONFIG.plans[0];
 }
 
+// Mensagem estratégica: conversa primeiro, detalhes depois.
+// Mantém o plano no texto, mas sem jogar preço na cara.
 function buildWhatsAppLink(plan) {
   const number = sanitizeNumber(CONFIG.whatsappNumber);
 
   const message =
     `${CONFIG.whatsappBaseMessage}\n\n` +
-    `Plano desejado: ${plan.name} (${currency(plan.price)})\n` +
-    `Cidade: ${CONFIG.city}\n\n` +
-    `Ainda tem vaga? Quero garantir minha posição antes do lançamento.`;
+    `Tenho interesse no plano ${plan.name}. Pode me explicar como funciona para garantir a vaga?`;
 
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
@@ -88,16 +93,25 @@ function updateBranding() {
   if (launchEl) launchEl.textContent = CONFIG.launchWindow;
 }
 
+/**
+ * Atualiza o vídeo do mockup (smartphone)
+ * Autoplay exige muted; o botão de som libera o áudio após clique.
+ */
 function updateVideos() {
   const phoneVideo = document.getElementById("demo-phone-video");
   if (!phoneVideo) return;
 
   phoneVideo.src = CONFIG.videoPaths.cliente;
+
   phoneVideo.muted = true;
   phoneVideo.volume = 1.0;
   phoneVideo.load();
 }
 
+/**
+ * Tabs Cliente/Freelancer para trocar o vídeo no smartphone
+ * (sem legenda automática)
+ */
 function setupVideoTabs() {
   const phoneVideo = document.getElementById("demo-phone-video");
   const tabs = document.querySelectorAll(".video-tab");
@@ -116,19 +130,21 @@ function setupVideoTabs() {
 
     if (phoneVideo.getAttribute("src") !== nextSrc) {
       phoneVideo.src = nextSrc;
+
+      // mantém estado do som
       phoneVideo.muted = !soundEnabled;
       phoneVideo.load();
       phoneVideo.play().catch(() => {});
     }
   }
 
-  tabs.forEach((btn) => {
-    btn.addEventListener("click", () => setActive(btn.dataset.video));
-  });
-
+  tabs.forEach((btn) => btn.addEventListener("click", () => setActive(btn.dataset.video)));
   setActive("cliente");
 }
 
+/**
+ * Botão de som (mobile-first)
+ */
 function setupSoundToggle() {
   const btn = document.querySelector(".sound-toggle");
   const phoneVideo = document.getElementById("demo-phone-video");
@@ -141,15 +157,16 @@ function setupSoundToggle() {
 
   btn.addEventListener("click", async () => {
     soundEnabled = !soundEnabled;
+
     phoneVideo.muted = !soundEnabled;
     if (soundEnabled) phoneVideo.volume = 1.0;
+
     await phoneVideo.play().catch(() => {});
     updateUI();
   });
 
-  phoneVideo.addEventListener("click", () => {
-    btn.click();
-  });
+  // UX: tocar no vídeo alterna som
+  phoneVideo.addEventListener("click", () => btn.click());
 
   updateUI();
 }
@@ -159,10 +176,12 @@ function wireCTAs() {
   buttons.forEach((btn) => {
     const planId = btn.dataset.plan || "pro";
     const plan = getPlan(planId);
+
     btn.href = buildWhatsAppLink(plan);
     btn.target = "_blank";
     btn.rel = "noopener";
 
+    // Simulação de escassez (se quiser, eu removo isso depois)
     btn.addEventListener("click", () => {
       const current = state.slots[plan.id];
       if (current > 0) {
@@ -179,12 +198,16 @@ function setupAccordion() {
     btn.addEventListener("click", () => {
       const panel = btn.nextElementSibling;
       const isOpen = panel.classList.contains("open");
+
       document.querySelectorAll(".panel").forEach((p) => p.classList.remove("open"));
       document.querySelectorAll(".accordion-item").forEach((b) => b.setAttribute("aria-expanded", "false"));
+      document.querySelectorAll(".accordion-item .icon").forEach((i) => (i.style.transform = "rotate(0deg)"));
 
       if (!isOpen) {
         panel.classList.add("open");
         btn.setAttribute("aria-expanded", "true");
+        const icon = btn.querySelector(".icon");
+        if (icon) icon.style.transform = "rotate(45deg)";
       }
     });
   });
