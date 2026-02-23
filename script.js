@@ -57,7 +57,7 @@ function buildWhatsAppLink(plan) {
 
   const message =
     `${CONFIG.whatsappBaseMessage}\n\n` +
-    `Tenho interesse no plano ${plan.name}. Pode me explicar como funciona para garantir a vaga?`;
+    
 
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
@@ -227,3 +227,4 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
