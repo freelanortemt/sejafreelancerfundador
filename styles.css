@@ -611,3 +611,38 @@ a { color: inherit; text-decoration: none; }
     width: min(320px, 100%);
   }
 }
+/* =========================
+   BOTÃO DE SOM (MOBILE FIRST)
+   ========================= */
+
+.sound-toggle {
+  padding: 12px 14px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Ajuste do header do card no mobile */
+@media (max-width: 768px) {
+  .video-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .video-tabs {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .video-tab {
+    width: 50%;
+    text-align: center;
+  }
+}
+
+/* No desktop, botão vira "tamanho normal" */
+@media (min-width: 769px) {
+  .sound-toggle {
+    width: fit-content;
+    justify-self: end;
+  }
+}
