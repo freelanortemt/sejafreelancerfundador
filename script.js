@@ -3,8 +3,11 @@ const CONFIG = {
   brandName: "Freela Norte",
   city: "Sinop - MT",
   whatsappNumber: "5566992410415", // inclua DDI+DDD, apenas dígitos
+
+  // Mensagem base (Guerra: mais direta, ainda 100% honesta)
   whatsappBaseMessage:
-    "Quero garantir posição antes do lançamento. Sei que é pagamento único e focado em visibilidade/prioridade.",
+    "Quero garantir minha posição ANTES da abertura pública em Sinop. Sei que é pagamento único, focado em visibilidade/prioridade (sem promessa de clientes).",
+
   founderProgramName: "Fundadores Freela Norte",
   launchWindow: "Lançamento em breve",
 
@@ -21,6 +24,19 @@ const CONFIG = {
     { id: "pro", name: "Pro", price: 497, vagas: 18, perks: ["Ranking priorizado por 6 meses", "Selo + badge Pro", "Grupo VIP", "Feedback direto"] },
     { id: "elite", name: "Elite", price: 997, vagas: 6, perks: ["Top ranking por 12 meses", "Badge Elite", "Suporte 1:1", "Prioridade máxima"] },
   ],
+
+  // Efeito de atenção (bem sutil) na seção nova
+  warMode: {
+    observeSectionId: "o-que-e",
+    revealClass: "war-reveal",
+    revealedClass: "war-revealed",
+  },
+
+  // Tracking local simples (sem analytics)
+  tracking: {
+    enabled: true,
+    storageKey: "freela_norte_clicks_v1",
+  }
 };
 
 // Estado visual de vagas
@@ -49,9 +65,23 @@ function getPlan(id) {
 
 function buildWhatsAppLink(plan) {
   const number = sanitizeNumber(CONFIG.whatsappNumber);
-  const message = `${CONFIG.whatsappBaseMessage}\n\nQuero entrar no ${CONFIG.founderProgramName} como ${plan.name} (${currency(
-    plan.price
-  )}). Ainda tem vaga? Quero garantir minha posição antes do lançamento.`;
+
+  // Complemento por plano (Guerra: pressão + clareza + pergunta de fechamento)
+  const planCloser = {
+    starter:
+      "Quero entrar e já começar com selo verificado + destaque inicial. Me passa o passo a passo e as vagas restantes desse lote?",
+    pro:
+      "Quero o PRO para entrar com prioridade de ranking e já sair na frente na minha categoria. Ainda tem vaga no lote atual? Quero garantir agora.",
+    elite:
+      "Quero o ELITE para ficar no topo com suporte 1:1 no lançamento. Ainda tem vaga? Se tiver, quero travar minha posição hoje.",
+  };
+
+  const message =
+    `${CONFIG.whatsappBaseMessage}\n\n` +
+    `Plano desejado: ${plan.name} (${currency(plan.price)})\n` +
+    `Cidade: ${CONFIG.city}\n\n` +
+    `${planCloser[plan.id] || "Ainda tem vaga? Quero garantir minha posição antes do lançamento."}`;
+
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
@@ -193,15 +223,52 @@ function setupSoundToggle() {
   updateUI();
 }
 
+/* Tracking local simples (sem analytics externo) */
+function trackClick(type, payload = {}) {
+  if (!CONFIG.tracking.enabled) return;
+  try {
+    const key = CONFIG.tracking.storageKey;
+    const raw = localStorage.getItem(key);
+    const data = raw ? JSON.parse(raw) : { total: 0, byPlan: {}, events: [] };
+
+    data.total += 1;
+    if (payload.planId) {
+      data.byPlan[payload.planId] = (data.byPlan[payload.planId] || 0) + 1;
+    }
+    data.events.push({
+      type,
+      payload,
+      ts: new Date().toISOString(),
+    });
+
+    // evita crescer infinito
+    if (data.events.length > 200) data.events = data.events.slice(-200);
+
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (_) {}
+}
+
+/* CTA WhatsApp: funciona com <a> ou <button> */
 function wireCTAs() {
   const buttons = document.querySelectorAll(".cta-whatsapp");
   buttons.forEach((btn) => {
     const planId = btn.dataset.plan || "pro";
     const plan = getPlan(planId);
-    btn.href = buildWhatsAppLink(plan);
-    btn.target = "_blank";
-    btn.rel = "noopener";
+    const link = buildWhatsAppLink(plan);
+
+    // Se for <a>, aplica href/target
+    if (btn.tagName.toLowerCase() === "a") {
+      btn.href = link;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+    } else {
+      // Se algum dia trocar para button, mantém funcionando
+      btn.addEventListener("click", () => window.open(link, "_blank", "noopener"));
+    }
+
     btn.addEventListener("click", () => {
+      trackClick("cta_whatsapp", { planId: plan.id, planName: plan.name });
+
       const current = state.slots[plan.id];
       if (current > 0) {
         state.slots[plan.id] = current - 1;
@@ -231,6 +298,63 @@ function setupAccordion() {
   if (items[0]) items[0].click(); // abre a primeira
 }
 
+/**
+ * 🚀 Efeito de atenção na seção nova (#o-que-e)
+ * - adiciona uma classe quando a seção entra na tela
+ * - não depende de libs
+ */
+function setupWarReveal() {
+  const id = CONFIG.warMode.observeSectionId;
+  const section = document.getElementById(id);
+  if (!section) return;
+
+  // adiciona classe base (pra CSS opcional)
+  section.classList.add(CONFIG.warMode.revealClass);
+
+  // Se browser não suportar IntersectionObserver, revela direto
+  if (!("IntersectionObserver" in window)) {
+    section.classList.add(CONFIG.warMode.revealedClass);
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          section.classList.add(CONFIG.warMode.revealedClass);
+          trackClick("section_view", { sectionId: id });
+          io.disconnect();
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
+
+  io.observe(section);
+}
+
+function injectWarCSS() {
+  // CSS mínimo pra animação (não substitui seu styles.css, só complementa)
+  const css = `
+    #${CONFIG.warMode.observeSectionId}.${CONFIG.warMode.revealClass} .card,
+    #${CONFIG.warMode.observeSectionId}.${CONFIG.warMode.revealClass} .section-head.left {
+      transform: translateY(10px);
+      opacity: 0.86;
+      transition: transform .45s ease, opacity .45s ease;
+      will-change: transform, opacity;
+    }
+    #${CONFIG.warMode.observeSectionId}.${CONFIG.warMode.revealedClass} .card,
+    #${CONFIG.warMode.observeSectionId}.${CONFIG.warMode.revealedClass} .section-head.left {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  `;
+  const style = document.createElement("style");
+  style.setAttribute("data-war-css", "true");
+  style.textContent = css;
+  document.head.appendChild(style);
+}
+
 function init() {
   updateBranding();
   updatePrices();
@@ -240,6 +364,10 @@ function init() {
   setupSoundToggle();
   wireCTAs();
   setupAccordion();
+
+  // Guerra
+  injectWarCSS();
+  setupWarReveal();
 }
 
 document.addEventListener("DOMContentLoaded", init);
