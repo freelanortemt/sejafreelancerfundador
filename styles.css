@@ -646,3 +646,82 @@ a { color: inherit; text-decoration: none; }
     justify-self: end;
   }
 }
+
+/* =========================================================
+   🚀 NÍVEL GUERRA — DESTAQUE VISUAL NA SEÇÃO "O QUE É"
+   (não quebra nada, só aumenta conversão e impacto)
+   ========================================================= */
+
+#o-que-e .section-head p strong {
+  color: #eafef4;
+}
+
+#o-que-e .section-head.left p {
+  color: #c9d7f1;
+}
+
+#o-que-e .section-head.left p strong {
+  color: #f3fff9;
+  text-shadow: 0 10px 40px rgba(34,211,238,0.10);
+}
+
+/* Deixa a área da esquerda mais “premium” e com foco */
+#o-que-e .section-head.left {
+  background: linear-gradient(120deg, rgba(34,211,238,0.10), rgba(74,222,128,0.08));
+  border: 1px solid rgba(74,222,128,0.22);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.32);
+}
+
+/* micro “barra de poder” abaixo do título */
+#o-que-e .section-head.left h2 {
+  position: relative;
+  padding-bottom: 10px;
+}
+#o-que-e .section-head.left h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 96px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  opacity: 0.95;
+}
+
+/* Cards da seção com um leve upgrade */
+#o-que-e .card {
+  background: linear-gradient(180deg, rgba(18,26,49,0.55), rgba(15,20,38,0.95));
+}
+
+/* Card “detalhe que muda o jogo” com borda mais agressiva */
+#o-que-e .cards-grid .card:nth-child(3) {
+  border-color: rgba(251,191,36,0.28);
+  box-shadow: 0 22px 70px rgba(251,191,36,0.08), var(--shadow);
+}
+
+/* frase de impacto mais forte */
+#o-que-e .cards-grid .card:nth-child(3) strong {
+  color: #fff7d1;
+}
+
+/* CTA row dentro da seção com mais “pressionamento” (sem ser apelativo) */
+#o-que-e .cta-row .btn.primary {
+  box-shadow: 0 24px 80px rgba(74,222,128,0.10), var(--shadow);
+}
+
+#o-que-e .cta-row .btn.secondary {
+  border-color: rgba(34,211,238,0.25);
+}
+
+/* Mobile: evita ficar “pesado” demais */
+@media (max-width: 768px) {
+  #o-que-e .section-head.left {
+    padding: 16px;
+  }
+  #o-que-e .section-head.left h2::after {
+    width: 82px;
+  }
+}
