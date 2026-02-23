@@ -3,35 +3,23 @@ const CONFIG = {
   brandName: "Freela Norte",
   city: "Sinop - MT",
   whatsappNumber: "5566992410415", // inclua DDI+DDD, apenas dígitos
-  whatsappBaseMessage: "Quero garantir posição antes do lançamento. Sei que é pagamento único e focado em visibilidade/prioridade.",
+  whatsappBaseMessage:
+    "Quero garantir posição antes do lançamento. Sei que é pagamento único e focado em visibilidade/prioridade.",
   founderProgramName: "Fundadores Freela Norte",
   launchWindow: "Lançamento em breve",
+
+  // Cloudinary (otimização automática)
   videoPaths: {
-    cliente: "assets/cliente.mp4",
-    freelancer: "assets/freelancer.mp4",
+    cliente:
+      "https://res.cloudinary.com/dsxthz96u/video/upload/q_auto,f_auto/v1771804387/cliente_s89oeu.mp4",
+    freelancer:
+      "https://res.cloudinary.com/dsxthz96u/video/upload/q_auto,f_auto/v1771804382/freelancer_kec6uy.mp4",
   },
+
   plans: [
-    {
-      id: "starter",
-      name: "Starter",
-      price: 197,
-      vagas: 12, // ajuste para o lote real
-      perks: ["Selo verificado", "Destaque inicial", "Teste Interno", "Checklist pronto"],
-    },
-    {
-      id: "pro",
-      name: "Pro",
-      price: 497,
-      vagas: 18, // ajuste para o lote real
-      perks: ["Ranking priorizado por 6 meses", "Selo + badge Pro", "Grupo VIP", "Feedback direto"],
-    },
-    {
-      id: "elite",
-      name: "Elite",
-      price: 997,
-      vagas: 6, // ajuste para o lote real
-      perks: ["Top ranking por 12 meses", "Badge Elite", "Suporte 1:1", "Prioridade máxima"],
-    },
+    { id: "starter", name: "Starter", price: 197, vagas: 12, perks: ["Selo verificado", "Destaque inicial", "Teste Interno", "Checklist pronto"] },
+    { id: "pro", name: "Pro", price: 497, vagas: 18, perks: ["Ranking priorizado por 6 meses", "Selo + badge Pro", "Grupo VIP", "Feedback direto"] },
+    { id: "elite", name: "Elite", price: 997, vagas: 6, perks: ["Top ranking por 12 meses", "Badge Elite", "Suporte 1:1", "Prioridade máxima"] },
   ],
 };
 
@@ -42,6 +30,9 @@ const state = {
     return acc;
   }, {}),
 };
+
+// Estado do som (persistente enquanto navega na página)
+let soundEnabled = false;
 
 function sanitizeNumber(numStr) {
   const digits = (numStr || "").replace(/\D/g, "");
@@ -58,7 +49,9 @@ function getPlan(id) {
 
 function buildWhatsAppLink(plan) {
   const number = sanitizeNumber(CONFIG.whatsappNumber);
-  const message = `${CONFIG.whatsappBaseMessage}\n\nQuero entrar no ${CONFIG.founderProgramName} como ${plan.name} (${currency(plan.price)}). Ainda tem vaga? Quero garantir minha posição antes do lançamento.`;
+  const message = `${CONFIG.whatsappBaseMessage}\n\nQuero entrar no ${CONFIG.founderProgramName} como ${plan.name} (${currency(
+    plan.price
+  )}). Ainda tem vaga? Quero garantir minha posição antes do lançamento.`;
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
@@ -94,13 +87,18 @@ function updateBranding() {
 
 /**
  * Atualiza o vídeo do mockup (smartphone)
- * Usa CONFIG.videoPaths
+ * Autoplay exige muted; o botão de som libera o áudio após clique.
  */
 function updateVideos() {
   const phoneVideo = document.getElementById("demo-phone-video");
   if (!phoneVideo) return;
 
   phoneVideo.src = CONFIG.videoPaths.cliente;
+
+  // Autoplay mais confiável com muted
+  phoneVideo.muted = true;
+  phoneVideo.volume = 1.0;
+
   phoneVideo.load();
 }
 
@@ -120,7 +118,6 @@ function setupVideoTabs() {
   };
 
   function setActive(key) {
-    // UI tabs
     tabs.forEach((btn) => {
       const isActive = btn.dataset.video === key;
       btn.classList.toggle("is-active", isActive);
@@ -132,9 +129,12 @@ function setupVideoTabs() {
 
     if (phoneVideo.getAttribute("src") !== nextSrc) {
       phoneVideo.src = nextSrc;
+
+      // mantém o estado do som ao trocar de vídeo
+      phoneVideo.muted = !soundEnabled;
+
       phoneVideo.load();
 
-      // tenta tocar (autoplay com muted geralmente funciona)
       const playPromise = phoneVideo.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {});
@@ -148,8 +148,49 @@ function setupVideoTabs() {
     btn.addEventListener("click", () => setActive(btn.dataset.video));
   });
 
-  // inicial
   setActive("cliente");
+}
+
+/**
+ * Botão de som (mobile-first)
+ * Regras do navegador: som só após interação do usuário.
+ */
+function setupSoundToggle() {
+  const btn = document.querySelector(".sound-toggle");
+  const phoneVideo = document.getElementById("demo-phone-video");
+  if (!btn || !phoneVideo) return;
+
+  function updateUI() {
+    btn.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+    btn.textContent = soundEnabled ? "🔊 Som ativado" : "🔇 Ativar som";
+  }
+
+  btn.addEventListener("click", async () => {
+    try {
+      soundEnabled = !soundEnabled;
+
+      phoneVideo.muted = !soundEnabled;
+      if (soundEnabled) phoneVideo.volume = 1.0;
+
+      const p = phoneVideo.play();
+      if (p && typeof p.catch === "function") {
+        await p.catch(() => {});
+      }
+
+      updateUI();
+    } catch (e) {
+      soundEnabled = false;
+      phoneVideo.muted = true;
+      updateUI();
+    }
+  });
+
+  // Mobile UX: tocar no vídeo também alterna som
+  phoneVideo.addEventListener("click", () => {
+    btn.click();
+  });
+
+  updateUI();
 }
 
 function wireCTAs() {
@@ -196,9 +237,9 @@ function init() {
   updateSlotsUI();
   updateVideos();
   setupVideoTabs();
+  setupSoundToggle();
   wireCTAs();
   setupAccordion();
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
