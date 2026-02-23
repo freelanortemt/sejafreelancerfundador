@@ -20,8 +20,13 @@
           <div class="brand-text">
             <span class="brand-title" id="brand-name">Freela Norte</span>
             <small id="brand-city">Marketplace regional • Sinop - MT</small>
+
+            <!-- Mobile-only: link leve (não polui a primeira dobra) -->
+            <a href="#planos" class="brand-link">Ver planos</a>
           </div>
         </div>
+
+        <!-- Desktop mantém; Mobile esconde via CSS -->
         <div class="nav-actions">
           <a href="#planos" class="ghost">Ver planos</a>
           <a class="btn primary cta-whatsapp" data-plan="pro" aria-label="Quero ser fundador via WhatsApp">Quero ser fundador</a>
@@ -38,8 +43,8 @@
         <div class="hero-copy">
           <h1>Quando Sinop começar a procurar, você vai estar no topo ou invisível?</h1>
           <p class="lead">
-O Freela Norte está selecionando os primeiros profissionais que vão iniciar com prioridade no ranking quando o aplicativo abrir em Sinop.
-</p>
+            O Freela Norte está selecionando os primeiros profissionais que vão iniciar com prioridade no ranking quando o aplicativo abrir em Sinop.
+          </p>
 
           <div class="mini-bullets" aria-label="Principais diferenciais">
             <span>✓ Selo verificado</span>
@@ -76,7 +81,6 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
         </div>
       </div>
 
-      <!-- Strip menor (menos redundante) -->
       <div class="offer-strip offer-strip--tight">
         <div class="strip-text">
           <strong>Quem entra primeiro constrói reputação primeiro.</strong>
@@ -155,7 +159,7 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
       </div>
     </section>
 
-    <!-- PROGRAMA (mais curto, sem redundância) -->
+    <!-- PROGRAMA -->
     <section class="section" id="programa">
       <div class="shell section-grid">
         <div class="section-head left">
@@ -165,6 +169,16 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
             Você compra <strong>posição e privilégios de visibilidade</strong> no lançamento:
             selo verificado, prioridade no ranking e entrada no teste interno para deixar o perfil pronto.
           </p>
+
+          <!-- Caixa anti-desconfiança (ranking explicado) -->
+          <div class="trust-box" role="note" aria-label="Como funciona o ranking">
+            <strong>Como funciona o ranking (bem claro):</strong>
+            <p>
+              Fundadores ganham <strong>prioridade inicial</strong> na abertura (de acordo com o plano).
+              Depois, quem manda é <strong>performance + avaliações + taxa de resposta + perfil completo</strong>.
+              <strong>Quem entrega melhor, sobe.</strong>
+            </p>
+          </div>
         </div>
 
         <div class="cards-grid two">
@@ -243,7 +257,7 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
             <div class="video-head">
               <div>
                 <h3>Veja uma prévia de como funciona no app</h3>
-                
+                <small>Toque em “Ativar som” para ouvir o áudio do vídeo.</small>
               </div>
 
               <div class="video-tabs" role="tablist" aria-label="Trocar vídeo">
@@ -272,10 +286,9 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
               <div class="phone__gloss"></div>
             </div>
 
+            <!-- Mantém vazio (sem frase) -->
             <div class="video-foot">
-              <p id="demo-video-caption" class="video-caption">
-              
-              </p>
+              <p id="demo-video-caption" class="video-caption"></p>
             </div>
           </div>
         </div>
@@ -314,6 +327,7 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
               <span class="pill pill-amber">Mais escolhido</span>
               <h3>Pro</h3>
               <p>Prioridade no ranking + grupo VIP</p>
+              <small class="plan-note">Após a abertura: avaliações e performance mandam no ranking.</small>
             </div>
             <div class="plan-price" data-plan-price="pro">R$497</div>
             <ul class="plan-list">
@@ -331,6 +345,7 @@ O Freela Norte está selecionando os primeiros profissionais que vão iniciar co
               <span class="pill pill-glow">Topo absoluto</span>
               <h3>Elite</h3>
               <p>Máximo destaque + suporte direto</p>
+              <small class="plan-note">Após a abertura: avaliações e performance mandam no ranking.</small>
             </div>
             <div class="plan-price" data-plan-price="elite">R$997</div>
             <ul class="plan-list">
