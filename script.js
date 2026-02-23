@@ -4,7 +4,7 @@ const CONFIG = {
   city: "Sinop - MT",
   whatsappNumber: "5566992410415",
   whatsappBaseMessage:
-    "Quero garantir minha posição ANTES da abertura pública em Sinop. Sei que é pagamento único, focado em visibilidade/prioridade (sem promessa de clientes).",
+    "Fala, tudo bem? Vi o Freela Norte e quero entrar antes da abertura em Sinop. Ainda tem vaga disponível?"",
 
   founderProgramName: "Fundadores Freela Norte",
   launchWindow: "Lançamento em breve",
