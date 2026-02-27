@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
   <title>Freela Norte — Fundadores Sinop/MT</title>
 
   <meta name="description" content="Entre antes do lançamento e garanta posição no ranking regional de Sinop. Selo verificado, prioridade inicial e onboarding." />
   <meta name="theme-color" content="#060914" />
-  <link rel="preload" as="image" href="assets/sinop.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/sinop-hero.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/sinop-hero-small.webp" type="image/webp" media="(max-width: 768px)" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="//res.cloudinary.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
@@ -39,8 +43,25 @@
       <nav class="nav">
         <a class="brand" href="#topo" aria-label="Ir ao topo">
           <picture>
-            <source srcset="assets/logo-freela-norte.webp" type="image/webp">
-            <img src="assets/logo-freela-norte.png" alt="Logo Freela Norte" class="logo-img" />
+            <source
+              srcset="assets/logo-freela-norte-sm.webp 1x, assets/logo-freela-norte.webp 2x"
+              type="image/webp"
+            >
+            <source
+              srcset="assets/logo-freela-norte-sm.png 1x, assets/logo-freela-norte.png 2x"
+              type="image/png"
+            >
+            <img
+              src="assets/logo-freela-norte-sm.png"
+              srcset="assets/logo-freela-norte-sm.png 1x, assets/logo-freela-norte.png 2x"
+              sizes="(max-width: 768px) 98px, 116px"
+              width="412"
+              height="420"
+              alt="Logo Freela Norte"
+              class="logo-img"
+              fetchpriority="high"
+              decoding="async"
+            />
           </picture>
 
           <div class="brand-text">
@@ -66,7 +87,7 @@
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Em Sinop, quem entra primeiro aparece primeiro.</h1>
+          <h1>Quando Sinop procurar, quem vai encontrar: você ou seu concorrente?</h1>
 
           <p class="lead">
             O Freela Norte está selecionando os primeiros profissionais para iniciar com <strong>vantagem de visibilidade</strong>
@@ -114,7 +135,7 @@
           </div>
 
           <p class="micro">
-            O app também inclui um <strong>marketplace regional</strong> (compra e venda) para gerar movimento constante:
+            O app também inclui um <strong>marketplace regional de produtos físicos</strong> (compra e venda) para gerar movimento constante:
             mais gente entrando no app → mais oportunidade para quem está bem posicionado.
           </p>
 
@@ -258,7 +279,7 @@
           </div>
 
           <div class="card">
-            <h3>Marketplace regional (compra e venda)</h3>
+            <h3>Marketplace de produtos físicos</h3>
             <ul>
               <li>Vitrine local dentro do app.</li>
               <li>Movimento diário (retenção).</li>
@@ -286,7 +307,7 @@
           <h2>Plano fundador = posição regional</h2>
           <p>
             Você entra com <strong>vantagem inicial</strong> no ranking de Sinop.
-            O marketplace é um recurso adicional que aumenta presença e movimento,
+            O marketplace de produtos físicos é um recurso adicional que aumenta presença e movimento,
             mas a compra aqui é: <strong>prioridade, selo e posicionamento</strong>.
           </p>
 
@@ -348,6 +369,70 @@
       </div>
     </section>
 
+    <!-- ESTRATÉGIA DE FLUXO -->
+    <section class="section soft" id="estrategia-fluxo">
+      <div class="shell section-grid">
+        <div class="section-head left">
+          <p class="eyebrow">Vantagem estrutural</p>
+          <h2>Dois marketplaces, um motor contínuo de demanda</h2>
+          <p>
+            Além dos serviços, o app agora também opera um <strong>marketplace de produtos físicos</strong>.
+            Isso mantém o Freela Norte com movimento diário e aumenta a recorrência de usuários dentro da plataforma.
+          </p>
+
+          <div class="trust-box" role="note" aria-label="Estratégia de crescimento">
+            <strong>Estratégia comercial (direta):</strong>
+            <p>
+              Produtos físicos geram tráfego constante. Esse tráfego vira atenção local.
+              E essa atenção aumenta a visibilidade dos freelancers de serviço, que são o foco de monetização.
+              <strong>Quem entra como fundador captura essa vantagem primeiro.</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="cards-grid two">
+          <div class="card">
+            <h3>Marketplace de produtos físicos</h3>
+            <ul>
+              <li>Cria fluxo de usuários todos os dias.</li>
+              <li>Aumenta tempo de uso e retorno ao app.</li>
+              <li>Fortalece lembrança e presença da marca local.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Marketplace de serviços</h3>
+            <ul>
+              <li>Recebe mais exposição com a base ativa maior.</li>
+              <li>Ganha mais chances de contato e orçamento.</li>
+              <li>Transforma recorrência em oportunidades reais.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Vantagem para quem entra no pré-lançamento</h3>
+            <ul>
+              <li>Posiciona seu perfil antes do pico de concorrência.</li>
+              <li>Aproveita o crescimento com selo e prioridade inicial.</li>
+              <li>Constrói reputação enquanto o fluxo acelera.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Leitura de guerra</h3>
+            <p class="muted" style="margin:0;">
+              Aqui não é só “ter mais uma feature”. É ter um <strong>canal permanente de atenção</strong> alimentando
+              o ambiente de serviços. Resultado: mais visibilidade para quem se posicionar primeiro.
+            </p>
+            <div class="cta-row" style="margin-top:12px;">
+              <a class="btn primary cta-whatsapp" data-plan="pro">Quero entrar com vantagem</a>
+              <a class="btn ghost" href="#planos">Ver planos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PROVA / AUTORIDADE -->
     <section class="section soft section-photo section-photo--focus" id="prova">
       <div class="shell">
@@ -379,7 +464,7 @@
                 <circle cx="18" cy="20" r="1.6"></circle>
               </svg>
             </div>
-            <h3>Marketplace incluso</h3>
+            <h3>Marketplace de produtos</h3>
             <p>Movimento diário para aumentar recorrência.</p>
           </div>
 
@@ -512,11 +597,12 @@
               <video
                 id="demo-phone-video"
                 class="phone__video"
-                preload="metadata"
+                preload="none"
                 autoplay
                 muted
                 loop
                 playsinline
+                poster="assets/sinop-hero-small.webp"
               >
                 Seu navegador não suporta vídeo.
               </video>
