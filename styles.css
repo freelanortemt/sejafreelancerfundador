@@ -67,6 +67,7 @@ strong{ color:#f7fbff; }
 
 img,
 video{
+  display:block;
   max-width:100%;
   height:auto;
 }
@@ -130,6 +131,17 @@ section[id]{
   background-repeat:no-repeat;
   background-position:center 28%;
   filter:saturate(1.14) contrast(1.12) brightness(0.9);
+}
+
+@supports (background-image:image-set(url("assets/sinop-hero.webp") type("image/webp"), url("assets/sinop.png") type("image/png"))){
+  .hero::before{
+    background-image:
+      linear-gradient(112deg, rgba(4,8,16,0.88), rgba(8,13,28,0.72)),
+      image-set(
+        url("assets/sinop-hero.webp") type("image/webp"),
+        url("assets/sinop.png") type("image/png")
+      );
+  }
 }
 
 .hero-overlay{
@@ -277,6 +289,12 @@ section[id]{
   cursor:pointer;
   transition:transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
   user-select:none;
+}
+
+.btn,
+.video-tab,
+.accordion-item{
+  min-height:44px;
 }
 
 .btn:hover{
@@ -696,6 +714,11 @@ section[id]{
   padding:58px 0 32px;
 }
 
+main .section{
+  content-visibility:auto;
+  contain-intrinsic-size:1px 920px;
+}
+
 .section.soft{
   background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
 }
@@ -719,6 +742,17 @@ section[id]{
   background-position:center;
   filter:saturate(1.1) contrast(1.09) brightness(0.92);
   transform:scale(1.045);
+}
+
+@supports (background-image:image-set(url("assets/sinop-hero.webp") type("image/webp"), url("assets/sinop.png") type("image/png"))){
+  .section-photo::before{
+    background-image:
+      linear-gradient(112deg, rgba(4,8,16,0.9), rgba(4,8,16,0.66) 52%, rgba(4,8,16,0.9)),
+      image-set(
+        url("assets/sinop-hero.webp") type("image/webp"),
+        url("assets/sinop.png") type("image/png")
+      );
+  }
 }
 
 .section-photo::after{
@@ -1341,6 +1375,46 @@ section[id]{
     padding:14px 0 46px;
   }
 
+  body::before{
+    opacity:0.1;
+  }
+
+  .hero-gridlines{
+    display:none;
+  }
+
+  .hero::before{
+    background-image:
+      linear-gradient(112deg, rgba(4,8,16,0.88), rgba(8,13,28,0.72)),
+      url("assets/sinop-hero-small.webp");
+  }
+
+  .section-photo::before{
+    background-image:
+      linear-gradient(112deg, rgba(4,8,16,0.9), rgba(4,8,16,0.66) 52%, rgba(4,8,16,0.9)),
+      url("assets/sinop-hero-small.webp");
+  }
+
+  @supports (background-image:image-set(url("assets/sinop-hero-small.webp") type("image/webp"), url("assets/sinop.png") type("image/png"))){
+    .hero::before{
+      background-image:
+        linear-gradient(112deg, rgba(4,8,16,0.88), rgba(8,13,28,0.72)),
+        image-set(
+          url("assets/sinop-hero-small.webp") type("image/webp"),
+          url("assets/sinop.png") type("image/png")
+        );
+    }
+
+    .section-photo::before{
+      background-image:
+        linear-gradient(112deg, rgba(4,8,16,0.9), rgba(4,8,16,0.66) 52%, rgba(4,8,16,0.9)),
+        image-set(
+          url("assets/sinop-hero-small.webp") type("image/webp"),
+          url("assets/sinop.png") type("image/png")
+        );
+    }
+  }
+
   .nav{
     flex-direction:column;
     align-items:flex-start;
@@ -1352,7 +1426,21 @@ section[id]{
   .brand-link{ display:inline-block; }
 
   .badge-row{
+    flex-wrap:nowrap;
+    overflow-x:auto;
     gap:8px;
+    padding-bottom:2px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+
+  .badge-row::-webkit-scrollbar{
+    display:none;
+  }
+
+  .badge-row .pill{
+    flex:0 0 auto;
+    white-space:nowrap;
   }
 
   .pill{
@@ -1478,6 +1566,17 @@ section[id]{
   .final-cta{
     padding-bottom:90px;
   }
+
+  .topbar,
+  .kpi-card,
+  .hero-card,
+  .card,
+  .proof-card,
+  .video-card,
+  .plan-card,
+  .mobile-cta{
+    backdrop-filter:none;
+  }
 }
 
 @media (max-width:560px){
@@ -1529,3 +1628,18 @@ section[id]{
   }
   .phone__video{ border-radius:26px; }
 }
+
+@media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+}
+
