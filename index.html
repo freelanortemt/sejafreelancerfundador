@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <!-- TOPBAR: escassez premium (sem inventar) -->
+  <!-- TOPBAR -->
   <div class="topbar" role="region" aria-label="Aviso do lote">
     <div class="shell topbar__inner">
       <div class="topbar__left">
@@ -28,8 +28,7 @@
 
       <div class="topbar__right">
         <span class="muted">
-          Lote atual encerra em
-          <strong><span id="deadline-inline">—</span></strong>
+          Encerra em <strong><span id="deadline-inline">—</span></strong>
           • Vagas limitadas por plano
         </span>
       </div>
@@ -40,12 +39,19 @@
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <div class="shell hero__inner">
+
+      <!-- NAV (mobile-first) -->
       <nav class="nav" aria-label="Navegação principal">
         <a class="brand" href="#topo" aria-label="Ir para o topo">
-          <picture>
-            <source srcset="assets/logo-freela-norte.webp" type="image/webp">
-            <img src="assets/logo-freela-norte.png" alt="Logo Freela Norte" class="logo-img" loading="eager" decoding="async" />
-          </picture>
+          <!-- ✅ Logo com fallback automático (assets -> raiz) -->
+          <img
+            src="assets/logo-freela-norte.png"
+            alt="Logo Freela Norte"
+            class="logo-img"
+            loading="eager"
+            decoding="async"
+            onerror="this.onerror=null;this.src='logo-freela-norte.png';"
+          />
 
           <div class="brand-text">
             <div class="brand-title" id="brand-name">Freela Norte</div>
@@ -53,9 +59,16 @@
           </div>
         </a>
 
-        <div class="nav-actions" aria-label="Ações">
+        <!-- Desktop actions -->
+        <div class="nav-actions" aria-label="Ações do topo (desktop)">
           <a class="ghost" href="#planos">Planos</a>
           <a class="btn primary cta-whatsapp" data-intent="top">Quero ser embaixador</a>
+        </div>
+
+        <!-- Mobile actions (sem sobrepor) -->
+        <div class="nav-mobile" aria-label="Ações do topo (mobile)">
+          <a class="ghost" href="#planos">Planos</a>
+          <a class="btn primary cta-whatsapp" data-intent="top-mobile">WhatsApp</a>
         </div>
       </nav>
 
@@ -66,7 +79,6 @@
       </div>
 
       <div class="hero__grid">
-        <!-- COPY: vendedor, dominante, curto -->
         <div class="hero__copy">
           <h1>Quando Sinop começar a procurar, vão encontrar você — ou o seu concorrente?</h1>
 
@@ -75,7 +87,6 @@
             e <strong>destaque</strong> na abertura.
           </p>
 
-          <!-- Ícones premium SVG -->
           <div class="hero__bullets" role="list" aria-label="Benefícios principais">
             <div class="bullet" role="listitem">
               <span class="bullet__icon" aria-hidden="true">
@@ -99,7 +110,7 @@
               </span>
               <div class="bullet__text">
                 <strong>Selo verificado</strong>
-                <small>Confiança imediata e mais conversas iniciadas.</small>
+                <small>Confiança imediata e mais conversas.</small>
               </div>
             </div>
 
@@ -111,7 +122,7 @@
               </span>
               <div class="bullet__text">
                 <strong>Perfil pronto pra vender</strong>
-                <small>Onboarding e ajustes para você entrar forte.</small>
+                <small>Onboarding e checklist pra entrar forte.</small>
               </div>
             </div>
           </div>
@@ -121,7 +132,6 @@
             <a class="btn secondary" href="#planos">Ver planos</a>
           </div>
 
-          <!-- Escassez premium: prazo + clareza -->
           <div class="hero__fine" aria-label="Informações do lote">
             <span class="fine-pill">
               <span class="fine-strong">Lote encerra em:</span>
@@ -131,20 +141,18 @@
               <span class="fine-strong">Pagamento único</span> • vantagem do lote atual
             </span>
             <span class="fine-pill">
-              Depois da abertura: ranking evolui por <span class="fine-strong">avaliações + desempenho</span>
+              Depois: posição por <span class="fine-strong">avaliações + desempenho</span>
             </span>
           </div>
         </div>
 
-        <!-- Painel premium: ocupação + ring + vagas por plano -->
         <aside class="hero__panel" aria-label="Painel de ocupação do lote">
           <div class="panel-card">
             <div class="panel-head">
               <div class="panel-head__copy">
                 <strong>Ocupação do lote</strong>
-                <small>Atualize as vagas no CONFIG quando vender.</small>
+                <small>Vagas limitadas por plano no lote atual.</small>
               </div>
-
               <span class="panel-badge" id="lot-status">Ativo</span>
             </div>
 
@@ -218,7 +226,7 @@
 
             <div class="panel-strip">
               <strong>Quem entra antes, constrói reputação antes.</strong>
-              <p class="muted">Embaixador começa com vantagem. Depois, mérito mantém a posição.</p>
+              <p class="muted">Embaixador começa com vantagem. Depois, mérito mantém posição.</p>
             </div>
           </div>
         </aside>
@@ -227,13 +235,12 @@
   </header>
 
   <main>
-    <!-- BLOCO DE TENSÃO: vendedor, curto -->
     <section class="section soft" id="tensao">
       <div class="shell">
         <div class="section-head">
           <p class="eyebrow">O jogo</p>
           <h2>O início decide quem vai ser visto.</h2>
-          <p>O primeiro impacto é onde a maioria perde espaço. Embaixador entra preparado e em destaque.</p>
+          <p>Embaixador entra preparado e em destaque — antes do ranking ficar disputado.</p>
         </div>
 
         <div class="tension-grid">
@@ -258,23 +265,22 @@
               <li>Mais difícil “furar a fila”</li>
               <li>Você corre atrás do que já foi ocupado</li>
             </ul>
-            <div class="tension-note muted">Não é teoria. É o que acontece em todo lançamento.</div>
+            <div class="tension-note muted">Quem começa forte, colhe primeiro.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STATUS / AUTORIDADE -->
     <section class="section" id="status">
       <div class="shell section-grid">
         <div class="section-head left">
           <p class="eyebrow">Status</p>
           <h2>Embaixador não disputa migalha de visibilidade.</h2>
-          <p>Você entra no lote certo, no momento certo, com o que realmente muda resultado: <strong>ser visto primeiro</strong>.</p>
+          <p>Você entra com o que muda resultado: <strong>ser visto primeiro</strong>.</p>
 
           <div class="trust-box" role="note" aria-label="Regra do ranking">
             <strong>Regra clara:</strong>
-            <p>Você começa com vantagem do lote. Depois, sua posição é sustentada por <strong>avaliações</strong> e <strong>desempenho</strong>.</p>
+            <p>Vantagem do lote no início. Depois, posição sustentada por <strong>avaliações</strong> e <strong>desempenho</strong>.</p>
           </div>
 
           <div class="cta-row">
@@ -288,9 +294,9 @@
             <h3>Você recebe</h3>
             <ul>
               <li>Selo verificado + badge Embaixador</li>
-              <li>Destaque e prioridade na abertura</li>
+              <li>Destaque e prioridade no início</li>
               <li>Acesso ao teste fechado</li>
-              <li>Onboarding e ajustes do perfil</li>
+              <li>Onboarding e checklist do perfil</li>
             </ul>
           </div>
 
@@ -298,7 +304,7 @@
             <h3>Você evita</h3>
             <ul>
               <li>Começar invisível</li>
-              <li>Entrar sem reputação e sem destaque</li>
+              <li>Entrar sem destaque</li>
               <li>Perder a janela do lote</li>
               <li>Disputar atenção com todo mundo</li>
             </ul>
@@ -307,21 +313,20 @@
           <div class="card">
             <h3>Sinop e região</h3>
             <p class="muted" style="margin:0;">
-              Tudo é pensado para o público local. Quanto mais gente da região entra, mais rápido vira rotina para clientes.
+              Estratégia focada no público local pra acelerar demanda e recorrência.
             </p>
           </div>
 
           <div class="card">
             <h3>Decisão simples</h3>
             <p class="muted" style="margin:0;">
-              Você entra agora com vantagem — ou entra depois tentando recuperar o que já foi ocupado.
+              Entre agora com vantagem — ou entre depois disputando atenção.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROVA (vídeos) -->
     <section class="section soft" id="prova">
       <div class="shell">
         <div class="section-head">
@@ -367,7 +372,6 @@
       </div>
     </section>
 
-    <!-- PLANOS -->
     <section class="section soft" id="planos">
       <div class="shell">
         <div class="section-head">
@@ -425,7 +429,7 @@
               <span class="pill pill-glow">Topo absoluto</span>
               <h3>Elite</h3>
               <p class="muted">Começar no topo</p>
-              <small class="plan-note">Para quem quer dominar a categoria desde o início.</small>
+              <small class="plan-note">Para dominar a categoria desde o início.</small>
             </div>
 
             <div class="plan-price" data-plan-price="elite">—</div>
@@ -446,31 +450,29 @@
         <div class="plan-note-box" role="note" aria-label="Transparência">
           <strong>Transparência:</strong>
           <p class="muted">
-            A vantagem é do lote inicial (posição, selo e destaque). Depois, o ranking evolui por mérito: atendimento, avaliações e resposta.
+            A vantagem é do lote inicial (posição, selo e destaque). Depois, ranking por mérito: atendimento, avaliações e resposta.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ONBOARDING -->
     <section class="section guarantee" id="garantia">
       <div class="shell guarantee-box">
         <div class="guarantee-copy">
           <p class="eyebrow">Onboarding</p>
           <h3>7 dias para seu perfil ficar pronto e convincente</h3>
-          <p class="muted">Verificação, ajustes e checklist — pra você entrar forte na abertura.</p>
+          <p class="muted">Verificação, ajustes e checklist — pra entrar forte na abertura.</p>
         </div>
         <a class="btn primary cta-whatsapp" data-intent="onboarding">Quero ativar agora</a>
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="section" id="faq">
       <div class="shell">
         <div class="section-head">
           <p class="eyebrow">FAQ</p>
           <h2>Perguntas frequentes</h2>
-          <p>Se preferir, chama no WhatsApp e a gente resolve rápido.</p>
+          <p>Se preferir, chama no WhatsApp e resolve rápido.</p>
         </div>
 
         <div class="accordion" role="tablist">
@@ -478,21 +480,21 @@
             <span>Isso é mensalidade?</span><span class="icon">+</span>
           </button>
           <div class="panel">
-            <p>Não. É pagamento único para entrar no lote de Embaixadores e ativar selo + destaque inicial conforme o plano.</p>
+            <p>Não. Pagamento único para entrar no lote de Embaixadores e ativar selo + destaque inicial conforme o plano.</p>
           </div>
 
           <button class="accordion-item" aria-expanded="false">
             <span>Tem cliente garantido?</span><span class="icon">+</span>
           </button>
           <div class="panel">
-            <p>Não prometemos cliente garantido. O foco aqui é posição e visibilidade no início. Depois, atendimento e avaliações fazem o resto.</p>
+            <p>Não prometemos cliente garantido. O foco é posição/visibilidade no início. Depois, atendimento e avaliações fazem o resto.</p>
           </div>
 
           <button class="accordion-item" aria-expanded="false">
             <span>Como recebo acesso?</span><span class="icon">+</span>
           </button>
           <div class="panel">
-            <p>Confirmando pelo WhatsApp, você recebe as instruções do teste fechado e inicia o onboarding.</p>
+            <p>Confirmando pelo WhatsApp, você recebe o acesso do teste fechado e inicia o onboarding.</p>
           </div>
 
           <button class="accordion-item" aria-expanded="false">
@@ -517,10 +519,9 @@
       </div>
     </section>
 
-    <!-- CTA FINAL -->
     <section class="section final-cta" id="cta-final">
       <div class="shell final-box">
-        <h2>Ou você entra como Embaixador agora… ou entra depois disputando atenção.</h2>
+        <h2>Entre como Embaixador agora — ou entre depois disputando atenção.</h2>
         <p>Garanta sua vaga no lote atual e comece com vantagem em Sinop e região.</p>
 
         <div class="cta-row center">
@@ -537,7 +538,6 @@
     </section>
   </main>
 
-  <!-- MOBILE CTA (thumb zone) -->
   <div class="mobile-cta" role="complementary" aria-label="Chamada móvel">
     <div class="mobile-cta__text">
       <strong>Garantir vaga agora</strong>
