@@ -1,21 +1,16 @@
-// ======================
-// CONFIG (AJUSTE AQUI)
-// ======================
 const CONFIG = {
   brandName: "Freela Norte",
   cityLabel: "Sinop e região",
   cityShort: "Sinop e região",
   whatsappNumber: "5566992410415",
 
-  // ✅ Escassez premium real (defina uma data/horário do encerramento do lote)
-  // Formato ISO: "2026-03-05T23:59:59-04:00"
+  // Prazo do lote (ajuste)
   lotDeadlineISO: "2026-03-05T23:59:59-04:00",
 
-  // ✅ Mensagem WhatsApp: profissional, generalista, sem empurrar plano
+  // WhatsApp (profissional e generalista)
   whatsappBaseMessage:
     "Olá! Tenho interesse no Programa de Embaixadores do Freela Norte (Sinop e região). Ainda tem vagas no lote atual? Como funciona para confirmar e ativar a verificação?",
 
-  // Vídeos
   videoPaths: {
     cliente:
       "https://res.cloudinary.com/dsxthz96u/video/upload/q_auto,f_auto/v1771804387/cliente_s89oeu.mp4",
@@ -25,10 +20,10 @@ const CONFIG = {
 
   videoCaptions: {
     cliente: "Cliente: encontra profissionais, vê reputação e chama no chat.",
-    freelancer: "Freelancer: perfil, serviços, chat e oportunidades."
+    freelancer: "Freelancer: perfil, serviços, chat e oportunidades.",
   },
 
-  // ✅ Vagas: atualize manualmente quando vender (isso é o mais profissional e real)
+  // Vagas (mantido real/manual — profissional)
   plans: [
     { id: "starter", name: "Starter", price: 197, vagas_total: 12, vagas_restantes: 12 },
     { id: "pro", name: "Pro", price: 497, vagas_total: 18, vagas_restantes: 18 },
@@ -36,16 +31,8 @@ const CONFIG = {
   ],
 };
 
-// ======================
-// STATE
-// ======================
-const state = {
-  soundEnabled: false,
-};
+const state = { soundEnabled: false };
 
-// ======================
-// HELPERS
-// ======================
 function sanitizeNumber(numStr) {
   const digits = (numStr || "").replace(/\D/g, "");
   return digits.startsWith("55") ? digits : `55${digits}`;
@@ -60,7 +47,6 @@ function clamp(n, min, max) {
 }
 
 function formatDeadlineShort(date) {
-  // Ex: "05/03 23:59"
   const d = new Date(date);
   const dd = String(d.getDate()).padStart(2, "0");
   const mm = String(d.getMonth() + 1).padStart(2, "0");
@@ -81,9 +67,6 @@ function formatCountdown(ms) {
   return `${pad(h)}h ${pad(m)}m ${pad(s)}s`;
 }
 
-// ======================
-// WHATSAPP LINK (generalista)
-// ======================
 function buildWhatsAppLink(extra = "") {
   const number = sanitizeNumber(CONFIG.whatsappNumber);
   const base = CONFIG.whatsappBaseMessage.trim();
@@ -91,14 +74,10 @@ function buildWhatsAppLink(extra = "") {
   return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
 }
 
-// ======================
-// UI UPDATES
-// ======================
 function updateBranding() {
   const brandNameEl = document.getElementById("brand-name");
   const brandCityEl = document.getElementById("brand-city");
   const cityPill = document.getElementById("city-pill");
-
   const footerBrand = document.getElementById("footer-brand");
   const footerCity = document.getElementById("footer-city");
   const topbarCity = document.getElementById("topbar-city");
@@ -134,39 +113,29 @@ function computeLotStats() {
   const used = Math.max(0, totals.total - totals.remaining);
   const pct = totals.total > 0 ? (used / totals.total) * 100 : 0;
 
-  return {
-    total: totals.total,
-    remaining: totals.remaining,
-    used,
-    percent: clamp(pct, 0, 100),
-  };
+  return { total: totals.total, remaining: totals.remaining, used, percent: clamp(pct, 0, 100) };
 }
 
 function updateSlotsProgressRing() {
   const { total, remaining, percent } = computeLotStats();
 
-  // total remaining
   const lotRemainingEl = document.getElementById("lot-remaining");
   if (lotRemainingEl) lotRemainingEl.textContent = `${remaining}/${total}`;
 
-  // badge status
   const lotStatus = document.getElementById("lot-status");
   if (lotStatus) lotStatus.textContent = remaining > 0 ? "Ativo" : "Encerrado";
 
-  // percent text
   const pctEl = document.getElementById("lot-percent");
   if (pctEl) pctEl.textContent = `${Math.round(percent)}%`;
 
-  // ring stroke
   const ringBar = document.querySelector(".ring__bar");
   if (ringBar) {
-    const C = 2 * Math.PI * 46; // r=46 -> aprox 289.027
+    const C = 2 * Math.PI * 46;
     const offset = C * (1 - percent / 100);
     ringBar.style.strokeDasharray = String(C);
     ringBar.style.strokeDashoffset = String(offset);
   }
 
-  // per-plan label + progress
   CONFIG.plans.forEach((plan) => {
     const restantes = Math.max(0, Number(plan.vagas_restantes || 0));
     const totalPlan = Math.max(1, Number(plan.vagas_total || 1));
@@ -177,7 +146,7 @@ function updateSlotsProgressRing() {
 
     document.querySelectorAll(`[data-slot="${plan.id}"]`).forEach((el) => {
       el.textContent = label;
-      if (restantes === 0) el.classList.add("slot-out");
+      el.classList.toggle("slot-out", restantes === 0);
     });
 
     document.querySelectorAll(`[data-progress="${plan.id}"]`).forEach((bar) => {
@@ -196,7 +165,6 @@ function updateDeadlineUI() {
   const lotDeadline = document.getElementById("lot-deadline");
   const mobileDeadline = document.getElementById("mobile-deadline");
 
-  // se deadline inválido
   if (Number.isNaN(deadline.getTime())) {
     const t = "em breve";
     if (deadlineInline) deadlineInline.textContent = t;
@@ -206,10 +174,7 @@ function updateDeadlineUI() {
     return;
   }
 
-  // formato curto fixo
   const fixed = formatDeadlineShort(deadline);
-
-  // countdown
   const countdown = ms > 0 ? formatCountdown(ms) : "encerrado";
   const txt = ms > 0 ? `${countdown} (até ${fixed})` : `encerrado (${fixed})`;
 
@@ -219,9 +184,6 @@ function updateDeadlineUI() {
   if (mobileDeadline) mobileDeadline.textContent = `Lote: ${ms > 0 ? countdown : "encerrado"}`;
 }
 
-// ======================
-// VIDEO
-// ======================
 function initVideo() {
   const phoneVideo = document.getElementById("demo-phone-video");
   const caption = document.getElementById("demo-video-caption");
@@ -288,21 +250,15 @@ function setupSoundToggle() {
   updateUI();
 }
 
-// ======================
-// CTA: WhatsApp (menos invasivo)
-// ======================
 function wireCTAs() {
   const buttons = document.querySelectorAll(".cta-whatsapp");
   buttons.forEach((btn) => {
-    // Se for botão de plano, adiciona apenas uma “preferência suave”
     const planId = btn.dataset.plan;
     let extra = "";
 
     if (planId) {
       const plan = CONFIG.plans.find((p) => p.id === planId);
-      if (plan) {
-        extra = `Tenho preferência pelo plano ${plan.name}. Ainda tem vaga disponível?`;
-      }
+      if (plan) extra = `Tenho preferência pelo plano ${plan.name}. Ainda tem vaga disponível?`;
     }
 
     btn.href = buildWhatsAppLink(extra);
@@ -311,9 +267,6 @@ function wireCTAs() {
   });
 }
 
-// ======================
-// FAQ
-// ======================
 function setupAccordion() {
   const items = document.querySelectorAll(".accordion-item");
   if (items.length === 0) return;
@@ -339,9 +292,6 @@ function setupAccordion() {
   items[0].click();
 }
 
-// ======================
-// INIT
-// ======================
 function init() {
   updateBranding();
   updatePrices();
@@ -355,7 +305,6 @@ function init() {
   wireCTAs();
   setupAccordion();
 
-  // deadline countdown refresh (1s)
   setInterval(updateDeadlineUI, 1000);
 }
 
