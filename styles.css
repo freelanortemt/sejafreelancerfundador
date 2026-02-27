@@ -1361,6 +1361,11 @@ main .section{
     display:none;
   }
 
+  .hero::before,
+  .section-photo::before{
+    filter:none;
+  }
+
   .nav{
     flex-direction:column;
     align-items:flex-start;
