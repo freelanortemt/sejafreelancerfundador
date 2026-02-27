@@ -1,13 +1,21 @@
-// Config central (ajuste aqui para refletir o lote atual)
+// ======================
+// CONFIG (AJUSTE AQUI)
+// ======================
 const CONFIG = {
   brandName: "Freela Norte",
-  city: "Sinop - MT",
-  whatsappNumber: "5566992410415", // inclua DDI+DDD, apenas dígitos
-  whatsappBaseMessage:
-    "Quero garantir minha posição antes da abertura pública em Sinop. Sei que é pagamento único e focado em visibilidade/prioridade (sem promessa de clientes).",
-  founderProgramName: "Fundadores Freela Norte",
-  launchWindow: "Lançamento em breve",
+  cityLabel: "Sinop e região",
+  cityShort: "Sinop e região",
+  whatsappNumber: "5566992410415",
 
+  // ✅ Escassez premium real (defina uma data/horário do encerramento do lote)
+  // Formato ISO: "2026-03-05T23:59:59-04:00"
+  lotDeadlineISO: "2026-03-05T23:59:59-04:00",
+
+  // ✅ Mensagem WhatsApp: profissional, generalista, sem empurrar plano
+  whatsappBaseMessage:
+    "Olá! Tenho interesse no Programa de Embaixadores do Freela Norte (Sinop e região). Ainda tem vagas no lote atual? Como funciona para confirmar e ativar a verificação?",
+
+  // Vídeos
   videoPaths: {
     cliente:
       "https://res.cloudinary.com/dsxthz96u/video/upload/q_auto,f_auto/v1771804387/cliente_s89oeu.mp4",
@@ -15,22 +23,29 @@ const CONFIG = {
       "https://res.cloudinary.com/dsxthz96u/video/upload/q_auto,f_auto/v1771804382/freelancer_kec6uy.mp4",
   },
 
+  videoCaptions: {
+    cliente: "Cliente: encontra profissionais, vê reputação e chama no chat.",
+    freelancer: "Freelancer: perfil, serviços, chat e oportunidades."
+  },
+
+  // ✅ Vagas: atualize manualmente quando vender (isso é o mais profissional e real)
   plans: [
-    { id: "starter", name: "Starter", price: 197, vagas: 12 },
-    { id: "pro", name: "Pro", price: 497, vagas: 18 },
-    { id: "elite", name: "Elite", price: 997, vagas: 6 },
+    { id: "starter", name: "Starter", price: 197, vagas_total: 12, vagas_restantes: 12 },
+    { id: "pro", name: "Pro", price: 497, vagas_total: 18, vagas_restantes: 18 },
+    { id: "elite", name: "Elite", price: 997, vagas_total: 6, vagas_restantes: 6 },
   ],
 };
 
+// ======================
+// STATE
+// ======================
 const state = {
-  slots: CONFIG.plans.reduce((acc, plan) => {
-    acc[plan.id] = plan.vagas;
-    return acc;
-  }, {}),
+  soundEnabled: false,
 };
 
-let soundEnabled = false;
-
+// ======================
+// HELPERS
+// ======================
 function sanitizeNumber(numStr) {
   const digits = (numStr || "").replace(/\D/g, "");
   return digits.startsWith("55") ? digits : `55${digits}`;
@@ -40,30 +55,62 @@ function currency(value) {
   return `R$ ${Number(value).toLocaleString("pt-BR")}`;
 }
 
-function getPlan(id) {
-  return CONFIG.plans.find((plan) => plan.id === id) || CONFIG.plans[0];
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
 }
 
-function buildWhatsAppLink(plan) {
+function formatDeadlineShort(date) {
+  // Ex: "05/03 23:59"
+  const d = new Date(date);
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mi = String(d.getMinutes()).padStart(2, "0");
+  return `${dd}/${mm} ${hh}:${mi}`;
+}
+
+function formatCountdown(ms) {
+  const totalSec = Math.max(0, Math.floor(ms / 1000));
+  const d = Math.floor(totalSec / 86400);
+  const h = Math.floor((totalSec % 86400) / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+
+  const pad = (n) => String(n).padStart(2, "0");
+  if (d > 0) return `${d}d ${pad(h)}h ${pad(m)}m`;
+  return `${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+}
+
+// ======================
+// WHATSAPP LINK (generalista)
+// ======================
+function buildWhatsAppLink(extra = "") {
   const number = sanitizeNumber(CONFIG.whatsappNumber);
-  const message =
-    `${CONFIG.whatsappBaseMessage}\n\n` +
-    `Plano desejado: ${plan.name} (${currency(plan.price)})\n` +
-    `Cidade: ${CONFIG.city}\n\n` +
-    `Ainda tem vaga? Quero garantir minha posição antes do lançamento.`;
-
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  const base = CONFIG.whatsappBaseMessage.trim();
+  const msg = extra ? `${base}\n\n${extra}` : base;
+  return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
 }
 
-function updateSlotsUI() {
-  CONFIG.plans.forEach((plan) => {
-    const value = state.slots[plan.id];
-    const label = value > 0 ? `${value} vaga${value > 1 ? "s" : ""}` : "Esgotado";
-    document.querySelectorAll(`[data-slot="${plan.id}"]`).forEach((el) => {
-      el.textContent = label;
-      if (value === 0) el.classList.add("slot-out");
-    });
-  });
+// ======================
+// UI UPDATES
+// ======================
+function updateBranding() {
+  const brandNameEl = document.getElementById("brand-name");
+  const brandCityEl = document.getElementById("brand-city");
+  const cityPill = document.getElementById("city-pill");
+
+  const footerBrand = document.getElementById("footer-brand");
+  const footerCity = document.getElementById("footer-city");
+  const topbarCity = document.getElementById("topbar-city");
+
+  if (brandNameEl) brandNameEl.textContent = CONFIG.brandName;
+  if (brandCityEl) brandCityEl.textContent = `Embaixadores • ${CONFIG.cityLabel}`;
+  if (cityPill) cityPill.textContent = CONFIG.cityLabel;
+
+  if (footerBrand) footerBrand.textContent = CONFIG.brandName;
+  if (footerCity) footerCity.textContent = CONFIG.cityLabel;
+
+  if (topbarCity) topbarCity.textContent = `${CONFIG.cityShort}:`;
 }
 
 function updatePrices() {
@@ -74,48 +121,125 @@ function updatePrices() {
   });
 }
 
-function updateBranding() {
-  const brandNameEl = document.getElementById("brand-name");
-  const brandCityEl = document.getElementById("brand-city");
-  const cityPill = document.getElementById("city-pill"); // pode não existir (ok)
-  const launchEl = document.getElementById("launch-window");
+function computeLotStats() {
+  const totals = CONFIG.plans.reduce(
+    (acc, p) => {
+      acc.total += Math.max(0, Number(p.vagas_total || 0));
+      acc.remaining += Math.max(0, Number(p.vagas_restantes || 0));
+      return acc;
+    },
+    { total: 0, remaining: 0 }
+  );
 
-  if (brandNameEl) brandNameEl.textContent = CONFIG.brandName;
-  if (brandCityEl) brandCityEl.textContent = `Marketplace regional • ${CONFIG.city}`;
-  if (cityPill) cityPill.textContent = CONFIG.city;
-  if (launchEl) launchEl.textContent = CONFIG.launchWindow;
+  const used = Math.max(0, totals.total - totals.remaining);
+  const pct = totals.total > 0 ? (used / totals.total) * 100 : 0;
+
+  return {
+    total: totals.total,
+    remaining: totals.remaining,
+    used,
+    percent: clamp(pct, 0, 100),
+  };
 }
 
-/**
- * Sempre coloca um src inicial no vídeo (fallback).
- */
-function ensureVideoSrc() {
+function updateSlotsProgressRing() {
+  const { total, remaining, percent } = computeLotStats();
+
+  // total remaining
+  const lotRemainingEl = document.getElementById("lot-remaining");
+  if (lotRemainingEl) lotRemainingEl.textContent = `${remaining}/${total}`;
+
+  // badge status
+  const lotStatus = document.getElementById("lot-status");
+  if (lotStatus) lotStatus.textContent = remaining > 0 ? "Ativo" : "Encerrado";
+
+  // percent text
+  const pctEl = document.getElementById("lot-percent");
+  if (pctEl) pctEl.textContent = `${Math.round(percent)}%`;
+
+  // ring stroke
+  const ringBar = document.querySelector(".ring__bar");
+  if (ringBar) {
+    const C = 2 * Math.PI * 46; // r=46 -> aprox 289.027
+    const offset = C * (1 - percent / 100);
+    ringBar.style.strokeDasharray = String(C);
+    ringBar.style.strokeDashoffset = String(offset);
+  }
+
+  // per-plan label + progress
+  CONFIG.plans.forEach((plan) => {
+    const restantes = Math.max(0, Number(plan.vagas_restantes || 0));
+    const totalPlan = Math.max(1, Number(plan.vagas_total || 1));
+    const usedPlan = totalPlan - restantes;
+    const percentPlan = clamp((usedPlan / totalPlan) * 100, 0, 100);
+
+    const label = restantes > 0 ? `${restantes} vaga${restantes > 1 ? "s" : ""}` : "Esgotado";
+
+    document.querySelectorAll(`[data-slot="${plan.id}"]`).forEach((el) => {
+      el.textContent = label;
+      if (restantes === 0) el.classList.add("slot-out");
+    });
+
+    document.querySelectorAll(`[data-progress="${plan.id}"]`).forEach((bar) => {
+      bar.style.width = `${percentPlan}%`;
+    });
+  });
+}
+
+function updateDeadlineUI() {
+  const deadline = new Date(CONFIG.lotDeadlineISO);
+  const now = new Date();
+  const ms = deadline.getTime() - now.getTime();
+
+  const deadlineInline = document.getElementById("deadline-inline");
+  const deadlineCompact = document.getElementById("deadline-compact");
+  const lotDeadline = document.getElementById("lot-deadline");
+  const mobileDeadline = document.getElementById("mobile-deadline");
+
+  // se deadline inválido
+  if (Number.isNaN(deadline.getTime())) {
+    const t = "em breve";
+    if (deadlineInline) deadlineInline.textContent = t;
+    if (deadlineCompact) deadlineCompact.textContent = t;
+    if (lotDeadline) lotDeadline.textContent = t;
+    if (mobileDeadline) mobileDeadline.textContent = `Lote: ${t}`;
+    return;
+  }
+
+  // formato curto fixo
+  const fixed = formatDeadlineShort(deadline);
+
+  // countdown
+  const countdown = ms > 0 ? formatCountdown(ms) : "encerrado";
+  const txt = ms > 0 ? `${countdown} (até ${fixed})` : `encerrado (${fixed})`;
+
+  if (deadlineInline) deadlineInline.textContent = fixed;
+  if (deadlineCompact) deadlineCompact.textContent = txt;
+  if (lotDeadline) lotDeadline.textContent = txt;
+  if (mobileDeadline) mobileDeadline.textContent = `Lote: ${ms > 0 ? countdown : "encerrado"}`;
+}
+
+// ======================
+// VIDEO
+// ======================
+function initVideo() {
   const phoneVideo = document.getElementById("demo-phone-video");
+  const caption = document.getElementById("demo-video-caption");
   if (!phoneVideo) return;
 
-  // Se já tiver src no HTML, mantém. Se não, aplica cliente.
-  const currentSrc = phoneVideo.getAttribute("src");
-  if (!currentSrc) phoneVideo.setAttribute("src", CONFIG.videoPaths.cliente);
-
-  // Autoplay mais confiável com muted
+  phoneVideo.src = CONFIG.videoPaths.cliente;
   phoneVideo.muted = true;
   phoneVideo.volume = 1.0;
+  phoneVideo.load();
 
-  const p = phoneVideo.play();
-  if (p && typeof p.catch === "function") p.catch(() => {});
+  if (caption) caption.textContent = CONFIG.videoCaptions.cliente || "";
 }
 
 function setupVideoTabs() {
   const phoneVideo = document.getElementById("demo-phone-video");
-  const captionEl = document.getElementById("demo-video-caption");
+  const caption = document.getElementById("demo-video-caption");
   const tabs = document.querySelectorAll(".video-tab");
-
   if (!phoneVideo || tabs.length === 0) return;
-
-  const captions = {
-    cliente: "",
-    freelancer: "",
-  };
 
   function setActive(key) {
     tabs.forEach((btn) => {
@@ -127,23 +251,17 @@ function setupVideoTabs() {
     const nextSrc = CONFIG.videoPaths[key];
     if (!nextSrc) return;
 
-    // troca de src só quando necessário
     if (phoneVideo.getAttribute("src") !== nextSrc) {
-      phoneVideo.setAttribute("src", nextSrc);
-      phoneVideo.muted = !soundEnabled;
-
+      phoneVideo.src = nextSrc;
+      phoneVideo.muted = !state.soundEnabled;
       phoneVideo.load();
-      const p = phoneVideo.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
+      phoneVideo.play().catch(() => {});
     }
 
-    if (captionEl) captionEl.textContent = captions[key] || "";
+    if (caption) caption.textContent = CONFIG.videoCaptions[key] || "";
   }
 
-  tabs.forEach((btn) => {
-    btn.addEventListener("click", () => setActive(btn.dataset.video));
-  });
-
+  tabs.forEach((btn) => btn.addEventListener("click", () => setActive(btn.dataset.video)));
   setActive("cliente");
 }
 
@@ -153,80 +271,56 @@ function setupSoundToggle() {
   if (!btn || !phoneVideo) return;
 
   function updateUI() {
-    btn.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
-    btn.textContent = soundEnabled ? "🔊 Som ativado" : "🔇 Ativar som";
+    btn.setAttribute("aria-pressed", state.soundEnabled ? "true" : "false");
+    btn.textContent = state.soundEnabled ? "🔊 Som ativado" : "🔇 Ativar som";
   }
 
   btn.addEventListener("click", async () => {
-    soundEnabled = !soundEnabled;
+    state.soundEnabled = !state.soundEnabled;
+    phoneVideo.muted = !state.soundEnabled;
+    if (state.soundEnabled) phoneVideo.volume = 1.0;
 
-    phoneVideo.muted = !soundEnabled;
-    if (soundEnabled) phoneVideo.volume = 1.0;
-
-    try {
-      const p = phoneVideo.play();
-      if (p && typeof p.catch === "function") await p.catch(() => {});
-    } catch (e) {
-      soundEnabled = false;
-      phoneVideo.muted = true;
-    }
-
+    await phoneVideo.play().catch(() => {});
     updateUI();
   });
 
-  // tocar no vídeo também alterna som (boa UX)
   phoneVideo.addEventListener("click", () => btn.click());
-
   updateUI();
 }
 
+// ======================
+// CTA: WhatsApp (menos invasivo)
+// ======================
 function wireCTAs() {
   const buttons = document.querySelectorAll(".cta-whatsapp");
-
-  // Se o JS falhar em algum ponto, pelo menos deixa um fallback
-  const fallbackPlan = getPlan("pro");
-  const fallbackHref = buildWhatsAppLink(fallbackPlan);
-
   buttons.forEach((btn) => {
-    const planId = btn.dataset.plan || "pro";
-    const plan = getPlan(planId);
+    // Se for botão de plano, adiciona apenas uma “preferência suave”
+    const planId = btn.dataset.plan;
+    let extra = "";
 
-    btn.setAttribute("href", buildWhatsAppLink(plan));
-    btn.setAttribute("target", "_blank");
-    btn.setAttribute("rel", "noopener");
-
-    btn.addEventListener("click", () => {
-      // decremento visual opcional
-      const current = state.slots[plan.id];
-      if (typeof current === "number" && current > 0) {
-        state.slots[plan.id] = current - 1;
-        updateSlotsUI();
+    if (planId) {
+      const plan = CONFIG.plans.find((p) => p.id === planId);
+      if (plan) {
+        extra = `Tenho preferência pelo plano ${plan.name}. Ainda tem vaga disponível?`;
       }
-    });
-  });
+    }
 
-  // Se não achou nenhum botão, não explode
-  if (buttons.length === 0) {
-    console.warn("Nenhum CTA .cta-whatsapp encontrado. Cheque o HTML.");
-  }
-
-  // Extra: garante que qualquer link sem href não fique morto
-  document.querySelectorAll("a.cta-whatsapp:not([href])").forEach((a) => {
-    a.setAttribute("href", fallbackHref);
-    a.setAttribute("target", "_blank");
-    a.setAttribute("rel", "noopener");
+    btn.href = buildWhatsAppLink(extra);
+    btn.target = "_blank";
+    btn.rel = "noopener";
   });
 }
 
+// ======================
+// FAQ
+// ======================
 function setupAccordion() {
   const items = document.querySelectorAll(".accordion-item");
-  if (!items.length) return;
+  if (items.length === 0) return;
 
   items.forEach((btn) => {
     btn.addEventListener("click", () => {
       const panel = btn.nextElementSibling;
-      if (!panel) return;
-
       const isOpen = panel.classList.contains("open");
 
       document.querySelectorAll(".panel").forEach((p) => p.classList.remove("open"));
@@ -245,23 +339,24 @@ function setupAccordion() {
   items[0].click();
 }
 
+// ======================
+// INIT
+// ======================
 function init() {
-  // trava de segurança: se algo der erro, não mata o resto
-  try { updateBranding(); } catch (e) { console.error("Branding error:", e); }
-  try { updatePrices(); } catch (e) { console.error("Prices error:", e); }
-  try { updateSlotsUI(); } catch (e) { console.error("Slots error:", e); }
+  updateBranding();
+  updatePrices();
+  updateSlotsProgressRing();
+  updateDeadlineUI();
 
-  try { ensureVideoSrc(); } catch (e) { console.error("Video src error:", e); }
-  try { setupVideoTabs(); } catch (e) { console.error("Tabs error:", e); }
-  try { setupSoundToggle(); } catch (e) { console.error("Sound error:", e); }
+  initVideo();
+  setupVideoTabs();
+  setupSoundToggle();
 
-  try { wireCTAs(); } catch (e) { console.error("CTA error:", e); }
-  try { setupAccordion(); } catch (e) { console.error("Accordion error:", e); }
+  wireCTAs();
+  setupAccordion();
+
+  // deadline countdown refresh (1s)
+  setInterval(updateDeadlineUI, 1000);
 }
 
-// Com defer no script, DOM já costuma estar pronto, mas deixo os dois caminhos
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
+document.addEventListener("DOMContentLoaded", init);
