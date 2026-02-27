@@ -3,370 +3,669 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Freela Norte — Embaixadores | Sinop & Região</title>
+  <title>Freela Norte — Fundadores Sinop/MT</title>
+
+  <meta name="description" content="Entre antes do lançamento e garanta posição no ranking regional de Sinop. Selo verificado, prioridade inicial e onboarding." />
+  <meta name="theme-color" content="#060914" />
+  <link rel="preload" as="image" href="assets/sinop.png" fetchpriority="high" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+
+  <!-- Barra superior (escassez + credibilidade) -->
+  <div class="topbar" role="region" aria-label="Aviso importante">
+    <div class="shell topbar__inner">
+      <div class="topbar__left">
+        <span class="dot pulse"></span>
+        <strong id="topbar-city">Sinop/MT:</strong> lote de fundadores aberto • vagas limitadas por plano
+      </div>
+      <div class="topbar__right">
+        <span class="muted">Fechou o lote → próximo entra mais caro/competitivo.</span>
+      </div>
+    </div>
+  </div>
+
   <header class="hero" id="topo">
-    <div class="hero__bg" aria-hidden="true"></div>
-    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-gridlines" aria-hidden="true"></div>
 
-    <div class="shell hero__inner">
-
+    <div class="shell hero-inner">
       <nav class="nav">
-        <div class="brand">
-          <img src="logo-freela-norte.png" alt="Logo Freela Norte" class="brand__logo" />
-          <div class="brand__text">
-            <div class="brand__name">Freela Norte</div>
-            <div class="brand__meta">Sinop & região</div>
-          </div>
-        </div>
+        <a class="brand" href="#topo" aria-label="Ir ao topo">
+          <picture>
+            <source srcset="assets/logo-freela-norte.webp" type="image/webp">
+            <img src="assets/logo-freela-norte.png" alt="Logo Freela Norte" class="logo-img" />
+          </picture>
 
-        <div class="nav__actions">
-          <a class="nav__link" href="#planos">Ver planos</a>
-          <a class="btn btn--primary cta-whatsapp" href="#" aria-label="Falar no WhatsApp">Quero ser Embaixador</a>
+          <div class="brand-text">
+            <span class="brand-title" id="brand-name">Freela Norte</span>
+            <small id="brand-city">Marketplace regional • Sinop - MT</small>
+            <span class="brand-link">Ver planos</span>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <a href="#vantagens" class="ghost">Vantagens</a>
+          <a href="#prova" class="ghost">Prova</a>
+          <a href="#planos" class="ghost">Planos</a>
+          <a class="btn primary cta-whatsapp" data-plan="pro" aria-label="Quero ser fundador via WhatsApp">Quero dominar Sinop</a>
         </div>
       </nav>
 
-      <div class="info-bar" role="note" aria-label="Informações do programa">
-        <div class="info-item">
-          <span class="dot dot--green"></span>
-          <strong>Programa de Embaixadores</strong>
-        </div>
-        <div class="info-item">
-          <span class="dot dot--sky"></span>
-          <strong>Sinop & região</strong>
-        </div>
-        <div class="info-item">
-          <span class="dot dot--amber"></span>
-          <strong>Prioridade na abertura</strong>
-        </div>
+      <div class="badge-row">
+        <span class="pill pill-ghost">Programa de Fundadores</span>
+        <span class="pill pill-glow" id="city-pill">Sinop - MT</span>
+        <span class="pill pill-sky">Regional: foco total na cidade</span>
       </div>
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Se o cliente procurar primeiro… você aparece primeiro.</h1>
+          <h1>Em Sinop, quem entra primeiro aparece primeiro.</h1>
+
           <p class="lead">
-            Entre como <strong>Embaixador</strong> e comece com <strong>mais visibilidade</strong> e <strong>selo verificado</strong>
-            na abertura do Freela Norte em <strong>Sinop & região</strong>.
+            O Freela Norte está selecionando os primeiros profissionais para iniciar com <strong>vantagem de visibilidade</strong>
+            e <strong>posição no ranking</strong> quando o aplicativo abrir ao público.
           </p>
 
-          <div class="hero-highlights">
-            <div class="hl">
-              <span class="hl__icon" aria-hidden="true">
+          <div class="signal-bar" role="list" aria-label="Benefícios principais">
+            <div class="signal-item" role="listitem">
+              <div class="signal-icon signal-icon--map" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M9.2 12.6l1.7 1.7 3.9-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M12 2l2.1 2.1 3-.5.9 3 2.7 1.5-1.5 2.7 1.5 2.7-2.7 1.5-.9 3-3-.5L12 22l-2.1-2.1-3 .5-.9-3L3.3 15l1.5-2.7L3.3 9.6 6 8.1l.9-3 3 .5L12 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z" />
+                  <circle cx="12" cy="10" r="2.75" />
                 </svg>
-              </span>
-              <div class="hl__text">
+              </div>
+              <div class="signal-text">
+                <strong>Ranking regional</strong>
+                <small>Sinop primeiro, cidade por cidade.</small>
+              </div>
+            </div>
+
+            <div class="signal-item" role="listitem">
+              <div class="signal-icon signal-icon--shield" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3 5 6v6c0 4.8 3 7.6 7 9 4-1.4 7-4.2 7-9V6l-7-3Z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
+              <div class="signal-text">
                 <strong>Selo verificado</strong>
-                <small>Credibilidade imediata no perfil</small>
+                <small>Confiança + mais cliques.</small>
               </div>
             </div>
 
-            <div class="hl">
-              <span class="hl__icon" aria-hidden="true">
+            <div class="signal-item" role="listitem">
+              <div class="signal-icon signal-icon--lightning" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M4 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M10 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M16 20v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M22 20V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M13 2 6 13h5l-1 9 8-12h-5V2Z" />
                 </svg>
-              </span>
-              <div class="hl__text">
-                <strong>Prioridade na abertura</strong>
-                <small>Comece na frente no ranking</small>
               </div>
-            </div>
-
-            <div class="hl">
-              <span class="hl__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 21s7-4.4 7-11a7 7 0 10-14 0c0 6.6 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
-                  <path d="M12 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" stroke="currentColor" stroke-width="2"/>
-                </svg>
-              </span>
-              <div class="hl__text">
-                <strong>Sinop & região</strong>
-                <small>Foco total no mercado local</small>
+              <div class="signal-text">
+                <strong>Onboarding guiado</strong>
+                <small>Perfil pronto antes do público.</small>
               </div>
             </div>
           </div>
+
+          <p class="micro">
+            O app também inclui um <strong>marketplace regional</strong> (compra e venda) para gerar movimento constante:
+            mais gente entrando no app → mais oportunidade para quem está bem posicionado.
+          </p>
 
           <div class="cta-row">
-            <a class="btn btn--primary cta-whatsapp" href="#">Falar agora no WhatsApp</a>
-            <a class="btn btn--secondary" href="#planos">Comparar planos</a>
+            <a class="btn primary cta-whatsapp" data-plan="pro">Garantir minha posição</a>
+            <a class="btn secondary" href="#planos">Ver planos</a>
           </div>
 
-          <div class="microtrust">
-            <span class="tag">Pagamento único</span>
-            <span class="tag">Vagas por lote</span>
-            <span class="tag">Onboarding guiado</span>
+          <div class="hero-meta">
+            <div class="meta-pill">Pagamento único • vantagem inicial</div>
+            <div class="meta-pill">Janela: <span id="launch-window">Lançamento em breve</span></div>
+            <div class="meta-pill">Transparência: depois o ranking depende de performance + avaliações</div>
           </div>
         </div>
 
-        <aside class="hero-side" aria-label="Disponibilidade do lote">
-          <div class="card card--glass">
-            <div class="card__head">
-              <div>
-                <strong class="card__title">Disponibilidade do lote</strong>
-                <div class="card__sub">Atualizado <span id="scarcity-updated">agora</span></div>
-              </div>
-              <span class="chip">Embaixadores</span>
+        <div class="hero-visual">
+          <div class="hero-kpi">
+            <div class="kpi-card">
+              <div class="kpi-label">Status do lote</div>
+              <div class="kpi-value" id="lot-status">Ativo</div>
+              <div class="kpi-sub">Vagas atualizando em tempo real</div>
             </div>
 
-            <div class="slots">
-              <div class="slot">
-                <div class="slot__top">
-                  <span class="slot__name">Starter</span>
-                  <span class="slot__pill" id="slot-starter">—</span>
-                </div>
-                <div class="bar"><div class="bar__fill" id="bar-starter"></div></div>
-              </div>
-
-              <div class="slot">
-                <div class="slot__top">
-                  <span class="slot__name">Pro</span>
-                  <span class="slot__pill slot__pill--sky" id="slot-pro">—</span>
-                </div>
-                <div class="bar"><div class="bar__fill bar__fill--sky" id="bar-pro"></div></div>
-              </div>
-
-              <div class="slot">
-                <div class="slot__top">
-                  <span class="slot__name">Elite</span>
-                  <span class="slot__pill slot__pill--amber" id="slot-elite">—</span>
-                </div>
-                <div class="bar"><div class="bar__fill bar__fill--amber" id="bar-elite"></div></div>
-              </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Cidade foco</div>
+              <div class="kpi-value" id="kpi-city">Sinop</div>
+              <div class="kpi-sub">Regionalização = diferencial</div>
             </div>
 
-            <div class="card__foot">
-              <p>Garanta sua entrada no lote atual e comece com vantagem na abertura.</p>
-              <a class="btn btn--primary btn--full cta-whatsapp" href="#">Quero entrar no lote</a>
-              <a class="btn btn--ghost btn--full" href="#faq">Tirar dúvidas</a>
+            <div class="kpi-card">
+              <div class="kpi-label">Objetivo</div>
+              <div class="kpi-value">Dominar</div>
+              <div class="kpi-sub">Reputação antes da massa</div>
             </div>
           </div>
-        </aside>
-      </div>
 
-      <div class="strip">
-        <div class="strip__text">
-          <strong>Sinop abre — quem já está posicionado colhe primeiro.</strong>
-          <span>Entre como Embaixador e comece com selo e prioridade.</span>
+          <div class="hero-card scarcity-panel" id="scarcity-panel">
+            <div class="card-head">
+              <p>Painel de disponibilidade por plano</p>
+              <small>Simulação dinâmica para pré-lançamento com atualização contínua.</small>
+            </div>
+
+            <div class="slot-line" data-scarcity-row="starter">
+              <div class="slot-main">
+                <strong>Starter</strong>
+                <small>Entrada validada por lote ativo</small>
+              </div>
+              <div class="slot-meta">
+                <span data-slot="starter" class="slot-pill">—</span>
+                <span class="slot-trend" data-trend="starter">Estável</span>
+              </div>
+              <div class="slot-meter"><span data-meter="starter"></span></div>
+            </div>
+
+            <div class="slot-line" data-scarcity-row="pro">
+              <div class="slot-main">
+                <strong>Pro</strong>
+                <small>Maior volume de procura diária</small>
+              </div>
+              <div class="slot-meta">
+                <span data-slot="pro" class="slot-pill highlight">—</span>
+                <span class="slot-trend" data-trend="pro">Estável</span>
+              </div>
+              <div class="slot-meter"><span data-meter="pro"></span></div>
+            </div>
+
+            <div class="slot-line" data-scarcity-row="elite">
+              <div class="slot-main">
+                <strong>Elite</strong>
+                <small>Alocação limitada com suporte dedicado</small>
+              </div>
+              <div class="slot-meta">
+                <span data-slot="elite" class="slot-pill">—</span>
+                <span class="slot-trend" data-trend="elite">Estável</span>
+              </div>
+              <div class="slot-meter"><span data-meter="elite"></span></div>
+            </div>
+
+            <div class="card-foot">
+              <span class="dot pulse"></span>
+              <small id="scarcity-feed">Sincronizando disponibilidade regional...</small>
+            </div>
+          </div>
+
+          <div class="offer-strip offer-strip--tight">
+            <div class="strip-text">
+              <strong>Decisão inteligente:</strong>
+              <p>Você não compra “acesso”. Você compra <strong>posição regional</strong> na abertura.</p>
+            </div>
+            <a class="btn primary cta-whatsapp" data-plan="pro">Quero entrar antes do público</a>
+          </div>
         </div>
-        <a class="btn btn--primary cta-whatsapp" href="#">Quero ser Embaixador</a>
       </div>
-
     </div>
   </header>
 
   <main>
 
-    <section class="sinop-banner" aria-label="Sinop e região">
-      <div class="sinop-banner__bg" aria-hidden="true"></div>
-      <div class="sinop-banner__shade" aria-hidden="true"></div>
+    <!-- O QUE É -->
+    <section class="section soft" id="o-que-e">
+      <div class="shell section-grid">
+        <div class="section-head left">
+          <p class="eyebrow">Posicionamento</p>
+          <h2>O que é o Freela Norte</h2>
 
-      <div class="shell sinop-banner__inner">
-        <p class="eyebrow">Pertencimento local</p>
-        <h2>Feito para Sinop & região</h2>
-        <p>
-          Um app regional para conectar clientes e profissionais com <strong>perfil</strong>, <strong>categoria</strong> e <strong>reputação</strong>.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn--primary cta-whatsapp" href="#">Falar no WhatsApp</a>
-          <a class="btn btn--secondary" href="#planos">Ver planos</a>
+          <p>
+            <strong>Freela Norte é um ecossistema regional.</strong>
+            Ele organiza o que hoje está no improviso (WhatsApp, grupos, indicação “no escuro”) em um padrão profissional:
+            <strong>perfil, categoria, chat e reputação</strong>.
+          </p>
+
+          <p class="callout">
+            <strong>O jogo é simples:</strong> quem entra antes pega espaço, cria reputação antes e aparece primeiro quando a cidade começar a usar.
+          </p>
+
+          <div class="cta-row" style="margin-top:14px;">
+            <a class="btn primary cta-whatsapp" data-plan="pro">Garantir minha posição</a>
+            <a class="btn ghost" href="#planos">Ver planos</a>
+          </div>
+        </div>
+
+        <div class="cards-grid two">
+          <div class="card">
+            <h3>Para o Cliente</h3>
+            <ul>
+              <li>Busca por categoria em segundos.</li>
+              <li>Publicar pedidos personalizados.</li>
+              <li>Decisão com <strong>avaliações reais</strong>.</li>
+              <li>Chat direto sem ruído.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Para o Freelancer</h3>
+            <ul>
+              <li>Perfil que vende por você.</li>
+              <li>Publicação de serviços para clientes.</li>
+              <li>Reputação que vira demanda.</li>
+              <li>Oportunidades todos os dias.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Marketplace regional (compra e venda)</h3>
+            <ul>
+              <li>Vitrine local dentro do app.</li>
+              <li>Movimento diário (retenção).</li>
+              <li>Mais visitas → mais chance de contato.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Sem promessa. Com vantagem real.</h3>
+            <ul>
+              <li>Não prometemos clientes garantidos.</li>
+              <li>Entregamos <strong>visibilidade</strong>, <strong>selo</strong> e <strong>prioridade inicial</strong>.</li>
+              <li>Depois, quem entrega melhor sobe no ranking.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="vantagens">
-      <div class="shell">
-        <div class="section-head">
+    <!-- VANTAGENS -->
+    <section class="section section-photo section-photo--north" id="vantagens">
+      <div class="shell section-grid">
+        <div class="section-head left">
           <p class="eyebrow">O que você recebe</p>
-          <h2>Você entra com vantagem — e aparece com mais força</h2>
-          <p>O Embaixador começa com prioridade e estrutura profissional de perfil para vender melhor.</p>
+          <h2>Plano fundador = posição regional</h2>
+          <p>
+            Você entra com <strong>vantagem inicial</strong> no ranking de Sinop.
+            O marketplace é um recurso adicional que aumenta presença e movimento,
+            mas a compra aqui é: <strong>prioridade, selo e posicionamento</strong>.
+          </p>
+
+          <div class="trust-box" role="note" aria-label="Como funciona o ranking">
+            <strong>Como funciona o ranking (bem claro):</strong>
+            <p>
+              Fundadores ganham <strong>prioridade inicial</strong> conforme o plano.
+              Depois, o ranking depende de <strong>performance + avaliações + taxa de resposta + perfil completo</strong>.
+              <strong>Quem entrega melhor, sobe.</strong>
+            </p>
+          </div>
         </div>
 
-        <div class="grid-3">
-          <article class="card card--soft">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 2l2.2 2.2 3.2-.6 1 3.2 2.8 1.6-1.6 2.8 1.6 2.8-2.8 1.6-1 3.2-3.2-.6L12 22l-2.2-2.2-3.2.6-1-3.2-2.8-1.6 1.6-2.8-1.6-2.8L5.6 6.8l1-3.2 3.2.6L12 2z" stroke="currentColor" stroke-width="2"/>
-                <path d="M9.2 12.6l1.7 1.7 3.9-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>Selo verificado</h3>
-            <p>Mais confiança no primeiro contato. Perfil com autoridade.</p>
-          </article>
+        <div class="cards-grid two">
+          <div class="card">
+            <h3>Você garante</h3>
+            <ul>
+              <li>Reserva de posição no ranking de Sinop.</li>
+              <li>Selo verificado + badge fundador.</li>
+              <li>Acesso ao Teste Interno.</li>
+              <li>Onboarding guiado em até 7 dias.</li>
+            </ul>
+          </div>
 
-          <article class="card card--soft">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M10 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M16 20v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M22 20V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3>Prioridade no início</h3>
-            <p>Posicionamento na abertura para ser visto primeiro.</p>
-          </article>
+          <div class="card">
+            <h3>Você evita</h3>
+            <ul>
+              <li>Entrar “no meio do público” sem visibilidade.</li>
+              <li>Ficar no fim da lista por falta de reputação.</li>
+              <li>Perder o lote e pagar mais caro depois.</li>
+              <li>Chegar atrasado quando a cidade já estiver usando.</li>
+            </ul>
+          </div>
 
-          <article class="card card--soft">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
+          <div class="card">
+            <h3>Regional é o diferencial</h3>
+            <p class="muted" style="margin:0;">
+              Plataformas grandes ignoram cidades médias. Aqui a lógica é inversa:
+              <strong>dominar cidade por cidade</strong> com qualidade, confiança e foco local.
+            </p>
+            <div class="cta-row" style="margin-top:12px;">
+              <a class="btn primary cta-whatsapp" data-plan="pro">Quero ser fundador</a>
+              <a class="btn secondary" href="#planos">Ver planos</a>
             </div>
-            <h3>Chat rápido</h3>
-            <p>Conversa direta com cliente e fechamento sem fricção.</p>
-          </article>
+          </div>
+
+          <div class="card">
+            <h3>Decisão inteligente</h3>
+            <p class="muted" style="margin:0;">
+              Você não está comprando “acesso ao app”.
+              Você está comprando <strong>vantagem de posicionamento</strong> na abertura de Sinop.
+            </p>
+            <div class="cta-row" style="margin-top:12px;">
+              <a class="btn primary cta-whatsapp" data-plan="pro">Garantir posição</a>
+              <a class="btn ghost" href="#faq">Tirar dúvidas</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section--soft" id="como-funciona">
+    <!-- PROVA / AUTORIDADE -->
+    <section class="section soft section-photo section-photo--focus" id="prova">
       <div class="shell">
         <div class="section-head">
-          <p class="eyebrow">Processo</p>
-          <h2>Como entrar em 3 passos</h2>
-          <p>Simples, rápido e com suporte para você começar forte.</p>
+          <p class="eyebrow">Prova</p>
+          <h2>Não é promessa. É sistema.</h2>
+          <p>O app já está funcional. Você entra antes para começar com vantagem.</p>
+        </div>
+
+        <div class="proof-grid">
+          <div class="proof-card">
+            <div class="proof-icon proof-icon--structure" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="8" height="8" rx="2"></rect>
+                <rect x="13" y="3" width="8" height="8" rx="2"></rect>
+                <rect x="3" y="13" width="8" height="8" rx="2"></rect>
+                <path d="M13 17h8M17 13v8"></path>
+              </svg>
+            </div>
+            <h3>Estrutura completa</h3>
+            <p>Perfis, categorias, chat, reputação e feed.</p>
+          </div>
+
+          <div class="proof-card">
+            <div class="proof-icon proof-icon--market" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 5h2l2.2 10.2a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 2-1.5L22 8H7.4"></path>
+                <circle cx="10" cy="20" r="1.6"></circle>
+                <circle cx="18" cy="20" r="1.6"></circle>
+              </svg>
+            </div>
+            <h3>Marketplace incluso</h3>
+            <p>Movimento diário para aumentar recorrência.</p>
+          </div>
+
+          <div class="proof-card">
+            <div class="proof-icon proof-icon--region" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z"></path>
+                <circle cx="12" cy="10" r="2.75"></circle>
+              </svg>
+            </div>
+            <h3>Regionalização real</h3>
+            <p>Sinop com foco total. Expansão por cidades.</p>
+          </div>
+
+          <div class="proof-card">
+            <div class="proof-icon proof-icon--onboarding" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="3.2"></circle>
+                <path d="M19.4 15a1 1 0 0 0 .2 1.1l.1.1a1 1 0 0 1 0 1.4l-.9.9a1 1 0 0 1-1.4 0l-.1-.1a1 1 0 0 0-1.1-.2 1 1 0 0 0-.6.9V20a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1v-.2a1 1 0 0 0-.6-.9 1 1 0 0 0-1.1.2l-.1.1a1 1 0 0 1-1.4 0l-.9-.9a1 1 0 0 1 0-1.4l.1-.1a1 1 0 0 0 .2-1.1 1 1 0 0 0-.9-.6H4a1 1 0 0 1-1-1v-1.2a1 1 0 0 1 1-1h.2a1 1 0 0 0 .9-.6 1 1 0 0 0-.2-1.1l-.1-.1a1 1 0 0 1 0-1.4l.9-.9a1 1 0 0 1 1.4 0l.1.1a1 1 0 0 0 1.1.2 1 1 0 0 0 .6-.9V4a1 1 0 0 1 1-1h1.2a1 1 0 0 1 1 1v.2a1 1 0 0 0 .6.9 1 1 0 0 0 1.1-.2l.1-.1a1 1 0 0 1 1.4 0l.9.9a1 1 0 0 1 0 1.4l-.1.1a1 1 0 0 0-.2 1.1 1 1 0 0 0 .9.6H20a1 1 0 0 1 1 1v1.2a1 1 0 0 1-1 1h-.2a1 1 0 0 0-.9.6Z"></path>
+              </svg>
+            </div>
+            <h3>Onboarding</h3>
+            <p>7 dias de suporte para perfil “pronto para vender”.</p>
+          </div>
+        </div>
+
+        <div class="compare">
+          <div class="compare-head">
+            <h3>Fundador vs. entrar depois</h3>
+            <p class="muted">Comparação direta do que muda na prática.</p>
+          </div>
+
+          <div class="compare-grid">
+            <div class="compare-col">
+              <div class="compare-title">Entrar como fundador</div>
+              <ul>
+                <li>Posição inicial no ranking</li>
+                <li>Selo verificado e badge</li>
+                <li>Menos concorrência no começo</li>
+                <li>Tempo para construir reputação</li>
+              </ul>
+            </div>
+
+            <div class="compare-col">
+              <div class="compare-title">Entrar depois</div>
+              <ul>
+                <li>Ranking já disputado</li>
+                <li>Mais concorrência e menos espaço</li>
+                <li>Menos chance de ser visto no início</li>
+                <li>Precisa correr atrás da reputação</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="compare-cta">
+            <a class="btn primary cta-whatsapp" data-plan="pro">Quero entrar como fundador</a>
+            <a class="btn ghost" href="#planos">Ver planos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE AGORA -->
+    <section class="section soft" id="porque-agora">
+      <div class="shell section-grid">
+        <div class="section-head left">
+          <p class="eyebrow">Escassez real</p>
+          <h2>Por que entrar agora</h2>
+          <p>
+            Quando a abertura pública acontecer, o ranking já vai estar disputado.
+            <strong>Fundadores entram com vantagem</strong> enquanto ainda tem espaço.
+          </p>
+        </div>
+
+        <div class="cards-grid two">
+          <div class="card"><h3>Menos concorrência</h3><p class="muted">Vagas limitadas por lote. Entrou cedo = menos disputa e mais tempo no topo.</p></div>
+          <div class="card"><h3>Boost de visibilidade</h3><p class="muted">Selo + prioridade aumentam sua chance de ser visto nos primeiros dias.</p></div>
+          <div class="card"><h3>Efeito de reputação</h3><p class="muted">Quem entra antes constrói avaliações antes — vantagem cumulativa.</p></div>
+          <div class="card"><h3>Perfil pronto</h3><p class="muted">Onboarding guiado para não perder a janela por falta de configuração.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="section" id="como-funciona">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Processo simples</p>
+          <h2>Como funciona em 3 passos</h2>
+          <p>Escolha o plano, confirme no WhatsApp e receba o onboarding.</p>
         </div>
 
         <div class="steps">
-          <div class="step">
-            <div class="step__n">1</div>
-            <h3>Escolha o plano</h3>
-            <p>Defina seu nível de prioridade e destaque.</p>
-          </div>
-          <div class="step">
-            <div class="step__n">2</div>
-            <h3>Confirme no WhatsApp</h3>
-            <p>Atendimento rápido e orientação completa.</p>
-          </div>
-          <div class="step">
-            <div class="step__n">3</div>
-            <h3>Onboarding</h3>
-            <p>Perfil pronto, selo e ativação no lote.</p>
+          <div class="step"><div class="step-number">1</div><h3>Escolha seu plano</h3><p class="muted">Defina seu nível de prioridade e destaque.</p></div>
+          <div class="step"><div class="step-number">2</div><h3>Fechamos no WhatsApp</h3><p class="muted">Validação rápida + pagamento único.</p></div>
+          <div class="step"><div class="step-number">3</div><h3>Onboarding em até 7 dias</h3><p class="muted">Ativamos selo, perfil e prioridade inicial.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VÍDEOS -->
+    <section class="section soft" id="videos">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Veja em ação</p>
+          <h2>Como funciona para clientes e freelancers</h2>
+          <p>Troque entre Cliente e Freelancer para ver os dois lados do app.</p>
+        </div>
+
+        <div class="video-grid video-grid--single">
+          <div class="video-card video-card--tabs">
+            <div class="video-head">
+              <div>
+                <h3>Prévia real do app</h3>
+                <small>Toque em “Ativar som” para ouvir o áudio do vídeo.</small>
+              </div>
+
+              <div class="video-tabs" role="tablist" aria-label="Trocar vídeo">
+                <button class="video-tab is-active" type="button" data-video="cliente" aria-pressed="true">Cliente</button>
+                <button class="video-tab" type="button" data-video="freelancer" aria-pressed="false">Freelancer</button>
+              </div>
+
+              <button class="btn secondary sound-toggle" type="button" aria-pressed="false">
+                Ativar som
+              </button>
+            </div>
+
+            <div class="phone phone--center">
+              <div class="phone__notch"></div>
+              <video
+                id="demo-phone-video"
+                class="phone__video"
+                preload="metadata"
+                autoplay
+                muted
+                loop
+                playsinline
+              >
+                Seu navegador não suporta vídeo.
+              </video>
+              <div class="phone__gloss"></div>
+            </div>
+
+            <div class="video-foot">
+              <p id="demo-video-caption" class="video-caption"></p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="planos">
+    <!-- PLANOS -->
+    <section class="section soft section-photo section-photo--market" id="planos">
       <div class="shell">
         <div class="section-head">
-          <p class="eyebrow">Planos</p>
+          <p class="eyebrow">Planos de fundador</p>
           <h2>Escolha seu nível de prioridade</h2>
-          <p>Pagamento único • Sinop & região • entrada no lote atual</p>
+          <p>Pagamento único • vagas por lote • entrou agora = vantagem real na abertura.</p>
         </div>
 
-        <div class="plans">
-          <article class="plan">
-            <div class="plan__top">
-              <span class="badge">Entrada segura</span>
+        <div class="plan-grid">
+          <div class="plan-card" data-plan-card="starter">
+            <div class="plan-top">
+              <span class="pill pill-ghost">Entrada segura</span>
               <h3>Starter</h3>
-              <p>Verificado + destaque inicial</p>
+              <p class="muted">Selo verificado + destaque inicial</p>
             </div>
-            <div class="plan__price">R$ 197</div>
-            <ul class="plan__list">
-              <li>Selo verificado</li>
-              <li>Destaque inicial</li>
-              <li>Acesso ao lote</li>
-              <li>Onboarding guiado</li>
+            <div class="plan-price" data-plan-price="starter">R$197</div>
+            <ul class="plan-list">
+              <li>Selo verificado ativo</li>
+              <li>Destaque na categoria por 30 dias</li>
+              <li>Acesso ao Teste Interno</li>
+              <li>Checklist de perfil pronto</li>
             </ul>
-            <a class="btn btn--secondary btn--full cta-whatsapp" href="#">Tenho interesse</a>
-          </article>
+            <div class="plan-slots">Vagas restantes: <span data-slot="starter">—</span></div>
+            <a class="btn outline cta-whatsapp" data-plan="starter">Quero esse plano</a>
+          </div>
 
-          <article class="plan plan--featured">
-            <div class="plan__top">
-              <span class="badge badge--green">Mais escolhido</span>
+          <div class="plan-card featured" data-plan-card="pro">
+            <div class="plan-top">
+              <span class="pill pill-amber">Mais escolhido</span>
               <h3>Pro</h3>
-              <p>Prioridade + presença forte</p>
+              <p class="muted">Prioridade no ranking + grupo VIP</p>
+              <small class="plan-note">Após a abertura: avaliações e performance mandam no ranking.</small>
             </div>
-            <div class="plan__price">R$ 497</div>
-            <ul class="plan__list">
-              <li>Prioridade no ranking</li>
-              <li>Selo + badge Pro</li>
-              <li>Suporte de ativação</li>
-              <li>Mais destaque na abertura</li>
+            <div class="plan-price" data-plan-price="pro">R$497</div>
+            <ul class="plan-list">
+              <li>Prioridade no ranking por 6 meses</li>
+              <li>Selo verificado + badge Pro</li>
+              <li>Grupo VIP de fundadores</li>
+              <li>Feedback direto com o time</li>
             </ul>
-            <a class="btn btn--primary btn--full cta-whatsapp" href="#">Quero esse plano</a>
-          </article>
+            <div class="plan-slots">Vagas restantes: <span data-slot="pro">—</span></div>
+            <a class="btn primary cta-whatsapp" data-plan="pro">Quero esse plano</a>
+          </div>
 
-          <article class="plan plan--elite">
-            <div class="plan__top">
-              <span class="badge badge--amber">Topo</span>
+          <div class="plan-card premium" data-plan-card="elite">
+            <div class="plan-top">
+              <span class="pill pill-glow">Topo absoluto</span>
               <h3>Elite</h3>
-              <p>Máximo destaque</p>
+              <p class="muted">Máximo destaque + suporte direto</p>
+              <small class="plan-note">Após a abertura: avaliações e performance mandam no ranking.</small>
             </div>
-            <div class="plan__price">R$ 997</div>
-            <ul class="plan__list">
-              <li>Máxima prioridade</li>
-              <li>Selo + badge Elite</li>
-              <li>Suporte 1:1</li>
-              <li>Presença premium</li>
+            <div class="plan-price" data-plan-price="elite">R$997</div>
+            <ul class="plan-list">
+              <li>Top ranking por 12 meses</li>
+              <li>Selo verificado + badge Elite</li>
+              <li>Suporte direto 1:1 no lançamento</li>
+              <li>Prioridade máxima em novas features</li>
             </ul>
-            <a class="btn btn--ghost btn--full cta-whatsapp" href="#">Falar no WhatsApp</a>
-          </article>
+            <div class="plan-slots">Vagas restantes: <span data-slot="elite">—</span></div>
+            <a class="btn dark cta-whatsapp" data-plan="elite">Quero esse plano</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section--soft" id="faq">
+    <!-- GARANTIA -->
+    <section class="section guarantee">
+      <div class="shell guarantee-box">
+        <div class="guarantee-copy">
+          <p class="eyebrow">Garantia de onboarding</p>
+          <h3>7 dias de suporte para deixar seu perfil pronto</h3>
+          <p class="muted">Sem promessa de clientes. Com ajuda ativa para configurar selo, perfil e destaque na abertura.</p>
+        </div>
+        <a class="btn primary cta-whatsapp" data-plan="pro">Quero ativar agora</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
       <div class="shell">
         <div class="section-head">
-          <p class="eyebrow">Dúvidas</p>
+          <p class="eyebrow">FAQ</p>
           <h2>Perguntas frequentes</h2>
-          <p>Rápido e direto.</p>
+          <p>Se quiser, chama direto no WhatsApp.</p>
         </div>
 
-        <div class="faq">
-          <button class="faq__q" aria-expanded="false">Isso é mensalidade? <span class="faq__i">+</span></button>
-          <div class="faq__a">Não. É pagamento único para entrar no lote e ativar o pacote de Embaixador.</div>
+        <div class="accordion" role="tablist">
+          <button class="accordion-item" aria-expanded="false"><span>Isso é mensalidade?</span><span class="icon">+</span></button>
+          <div class="panel"><p>Não. É pagamento único para garantir posição, selo verificado e prioridade conforme o plano escolhido.</p></div>
 
-          <button class="faq__q" aria-expanded="false">É só para Sinop? <span class="faq__i">+</span></button>
-          <div class="faq__a">Sim: foco em Sinop & região para fortalecer o ecossistema local.</div>
+          <button class="accordion-item" aria-expanded="false"><span>O que muda se eu entrar depois?</span><span class="icon">+</span></button>
+          <div class="panel"><p>Você entra com mais concorrência, menos espaço nas primeiras posições e com o lote mais caro/competitivo.</p></div>
 
-          <button class="faq__q" aria-expanded="false">Como funciona o verificado? <span class="faq__i">+</span></button>
-          <div class="faq__a">Validação simples com conferência e confirmação de atuação local.</div>
+          <button class="accordion-item" aria-expanded="false"><span>Como recebo acesso?</span><span class="icon">+</span></button>
+          <div class="panel"><p>Após confirmar pelo WhatsApp, enviamos o acesso do Teste Interno e iniciamos o onboarding em até 7 dias.</p></div>
 
-          <button class="faq__q" aria-expanded="false">Como eu entro? <span class="faq__i">+</span></button>
-          <div class="faq__a">Você chama no WhatsApp, escolhe o plano e recebe onboarding para ativar.</div>
+          <button class="accordion-item" aria-expanded="false"><span>É só para Sinop?</span><span class="icon">+</span></button>
+          <div class="panel"><p>Sim. Foco total em Sinop - MT neste lote para garantir qualidade e destaque local.</p></div>
+
+          <button class="accordion-item" aria-expanded="false"><span>Como funciona o verificado?</span><span class="icon">+</span></button>
+          <div class="panel"><p>Validação simples: documento, atuação local e conferência. Feito pelo time via WhatsApp.</p></div>
+
+          <button class="accordion-item" aria-expanded="false"><span>E se eu tiver dúvidas?</span><span class="icon">+</span></button>
+          <div class="panel"><p>Suporte direto pelo WhatsApp e no grupo dos fundadores para resolver qualquer ponto antes do lançamento.</p></div>
         </div>
+      </div>
+    </section>
 
-        <div class="final-cta">
-          <h2>Pronto para começar na frente?</h2>
-          <p>Fale agora e garanta sua entrada no lote atual.</p>
-          <div class="cta-row">
-            <a class="btn btn--primary cta-whatsapp" href="#">Quero ser Embaixador</a>
-            <a class="btn btn--secondary" href="#planos">Ver planos</a>
-          </div>
+    <!-- CTA FINAL -->
+    <section class="section final-cta section-photo section-photo--cta" id="cta-final">
+      <div class="shell final-box">
+        <h2>Garanta sua posição de fundador agora</h2>
+        <p>Entre antes, apareça antes e tenha prioridade real no ranking quando Sinop abrir ao público.</p>
+        <div class="cta-row">
+          <a class="btn primary cta-whatsapp" data-plan="pro">Quero garantir minha vaga</a>
+          <a class="btn ghost" href="#planos">Comparar planos</a>
         </div>
       </div>
     </section>
 
   </main>
 
-  <div class="sticky" role="complementary" aria-label="Ação rápida">
-    <div class="sticky__text">
-      <strong>Entrar como Embaixador</strong>
-      <span>Sinop & região • prioridade na abertura</span>
+  <!-- CTA mobile -->
+  <div class="mobile-cta" role="complementary">
+    <div class="mobile-cta-text">
+      <strong>Garantir vaga de fundador</strong>
+      <span>Pagamento único • prioridade no ranking</span>
     </div>
-    <a class="btn btn--primary cta-whatsapp" href="#" aria-label="Abrir WhatsApp">WhatsApp</a>
+    <a class="btn primary cta-whatsapp" data-plan="pro">WhatsApp</a>
   </div>
 
   <footer class="footer">
-    <div>Freela Norte • Sinop & região</div>
-    <div class="footer__muted">Programa de Embaixadores • Pagamento único • Vagas por lote</div>
+    <div><strong id="footer-brand">Freela Norte</strong> • <span id="footer-city">Sinop - MT</span></div>
+    <div>Transparência: vagas limitadas, pagamento único, prioridade no lançamento.</div>
   </footer>
 
   <script src="script.js"></script>
